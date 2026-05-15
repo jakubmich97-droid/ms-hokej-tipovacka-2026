@@ -1,0 +1,58 @@
+[
+  {
+    "home": "🇨🇿 Česko",
+    "away": "🇸🇪 Švédsko",
+    "resultHome": 3,
+    "resultAway": 2,
+    "tips": [
+      {
+        "name": "Kuba",
+        "home": 3,
+        "away": 2
+      },
+      {
+        "name": "Pepa",
+        "home": 4,
+        "away": 2
+      },
+      {
+        "name": "Martin",
+        "home": 1,
+        "away": 3
+      },
+      {
+        "name": "Tomáš",
+        "home": 3,
+        "away": 1
+      }
+    ]
+  },
+  {
+    "home": "🇨🇦 Kanada",
+    "away": "🇺🇸 USA",
+    "resultHome": 4,
+    "resultAway": 1,
+    "tips": [
+      {
+        "name": "Kuba",
+        "home": 4,
+        "away": 1
+      },
+      {
+        "name": "Pepa",
+        "home": 5,
+        "away": 2
+      },
+      {
+        "name": "Martin",
+        "home": 2,
+        "away": 1
+      },
+      {
+        "name": "Tomáš",
+        "home": 4,
+        "away": 3
+      }
+    ]
+  }
+]
