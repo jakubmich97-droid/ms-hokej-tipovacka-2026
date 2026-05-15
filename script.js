@@ -12,22 +12,33 @@ function startApp(matches) {
   let totalExact = 0;
 
   matches.forEach(match => {
-    let bestDistance = Infinity;
+    const realWinner = getWinner(match.resultHome, match.resultAway);
 
     match.tips.forEach(tip => {
-      const distance = getDistance(
+      tip.distance = getDistance(
         tip.home,
         tip.away,
         match.resultHome,
         match.resultAway
       );
 
-      tip.distance = distance;
+      tip.correctWinner = getWinner(tip.home, tip.away) === realWinner;
 
-      if (distance < bestDistance) {
-        bestDistance = distance;
-      }
+      tip.isExact =
+        tip.home === match.resultHome &&
+        tip.away === match.resultAway;
     });
+
+    const nonExactTips = match.tips.filter(tip => !tip.isExact);
+    const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
+
+    const tipsForClosest =
+      correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
+
+    const bestDistance =
+      tipsForClosest.length > 0
+        ? Math.min(...tipsForClosest.map(tip => tip.distance))
+        : null;
 
     match.tips.forEach(tip => {
       if (!leaderboard[tip.name]) {
@@ -37,15 +48,14 @@ function startApp(matches) {
         };
       }
 
-      const isExact =
-        tip.home === match.resultHome &&
-        tip.away === match.resultAway;
-
-      if (isExact) {
+      if (tip.isExact) {
         leaderboard[tip.name].points += 3;
         leaderboard[tip.name].exact += 1;
         totalExact++;
-      } else if (tip.distance === bestDistance) {
+      } else if (
+        tipsForClosest.includes(tip) &&
+        tip.distance === bestDistance
+      ) {
         leaderboard[tip.name].points += 1;
       }
     });
@@ -62,6 +72,12 @@ function startApp(matches) {
 
 function getDistance(tipHome, tipAway, resultHome, resultAway) {
   return Math.abs(tipHome - resultHome) + Math.abs(tipAway - resultAway);
+}
+
+function getWinner(home, away) {
+  if (home > away) return "home";
+  if (away > home) return "away";
+  return "draw";
 }
 
 function renderLeaderboard(players) {
@@ -95,18 +111,14 @@ function renderMatches(matches) {
   container.innerHTML = "";
 
   matches.forEach(match => {
-    const bestDistance = Math.min(...match.tips.map(tip => tip.distance));
+    const closestTips = getClosestTipsForMatch(match);
 
     const tipsHtml = match.tips.map(tip => {
-      const isExact =
-        tip.home === match.resultHome &&
-        tip.away === match.resultAway;
-
       let badge = `<span class="badge badge-zero">0 bodů</span>`;
 
-      if (isExact) {
+      if (tip.isExact) {
         badge = `<span class="badge badge-exact">+3 body</span>`;
-      } else if (tip.distance === bestDistance) {
+      } else if (closestTips.includes(tip)) {
         badge = `<span class="badge badge-close">+1 bod</span>`;
       }
 
@@ -149,6 +161,22 @@ function renderMatches(matches) {
 
     container.appendChild(card);
   });
+}
+
+function getClosestTipsForMatch(match) {
+  const nonExactTips = match.tips.filter(tip => !tip.isExact);
+  const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
+
+  const tipsForClosest =
+    correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
+
+  if (tipsForClosest.length === 0) {
+    return [];
+  }
+
+  const bestDistance = Math.min(...tipsForClosest.map(tip => tip.distance));
+
+  return tipsForClosest.filter(tip => tip.distance === bestDistance);
 }
 
 function renderStats(matches, players, totalExact) {
