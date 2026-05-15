@@ -39,7 +39,7 @@
     "home": "USA",
     "away": "Švýcarsko",
     "resultHome": 1,
-    "resultAway": 2,
+    "resultAway": 3,
     "tips": [
       { "name": "Kuba", "home": 2, "away": 4 },
       { "name": "Dejv", "home": 2, "away": 3 },
