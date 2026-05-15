@@ -1,70 +1,93 @@
 <!DOCTYPE html>
-          leaderboard[tip.name].points += 1;
-        }
-      });
-    });
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    const sortedPlayers = Object.entries(leaderboard)
-      .sort((a, b) => b[1].points - a[1].points);
+  <title>MS Tipovačka 2026</title>
 
-    const leaderboardBody = document.querySelector("#leaderboard tbody");
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    sortedPlayers.forEach((player, index) => {
-      const tr = document.createElement("tr");
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">🏒 Hokejová tipovačka</p>
+      <h1>MS Tipovačka 2026</h1>
+      <p class="subtitle">Kdo má nejlepší hokejový čuch?</p>
+    </div>
+  </header>
 
-      let className = "";
+  <main>
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Tipéři</span>
+        <strong id="players-count">0</strong>
+      </div>
 
-      if (index === 0) className = "gold";
-      if (index === 1) className = "silver";
-      if (index === 2) className = "bronze";
+      <div class="stat-card">
+        <span class="stat-label">Zápasy</span>
+        <strong id="matches-count">0</strong>
+      </div>
 
-      tr.innerHTML = `
-        <td class="${className}">${index + 1}</td>
-        <td>${player[0]}</td>
-        <td>${player[1].points}</td>
-        <td>${player[1].exact}</td>
-      `;
+      <div class="stat-card">
+        <span class="stat-label">Přesné trefy</span>
+        <strong id="exact-count">0</strong>
+      </div>
 
-      leaderboardBody.appendChild(tr);
-    });
+      <div class="stat-card">
+        <span class="stat-label">Aktuální lídr</span>
+        <strong id="current-leader">-</strong>
+      </div>
+    </section>
 
-    const matchesContainer = document.getElementById("matches");
+    <section class="section">
+      <div class="section-header">
+        <h2>🏆 Celkové pořadí</h2>
+        <p>3 body za přesný výsledek, 1 bod za nejbližší tip.</p>
+      </div>
 
-    matches.forEach(match => {
-      const card = document.createElement("div");
-      card.className = "card";
-
-      card.innerHTML = `
-        <div class="match-title">
-          ${match.home} vs ${match.away}
-        </div>
-
-        <div class="result">
-          ${match.resultHome} : ${match.resultAway}
-        </div>
-
-        <table>
+      <div class="card">
+        <table id="leaderboard">
           <thead>
             <tr>
+              <th>#</th>
               <th>Hráč</th>
-              <th>Tip</th>
+              <th>Body</th>
+              <th>Přesné trefy</th>
             </tr>
           </thead>
-          <tbody>
-            ${match.tips.map(tip => `
-              <tr>
-                <td>${tip.name}</td>
-                <td>${tip.home}:${tip.away}</td>
-              </tr>
-            `).join("")}
-          </tbody>
+          <tbody></tbody>
         </table>
-      `;
+      </div>
+    </section>
 
-      matchesContainer.appendChild(card);
-    });
+    <section class="section">
+      <div class="section-header">
+        <h2>📋 Zápasy</h2>
+        <p>Přehled výsledků a jednotlivých tipů.</p>
+      </div>
 
-  </script>
+      <div id="matches" class="matches-list"></div>
+    </section>
 
+    <section class="section">
+      <div class="section-header">
+        <h2>📖 Pravidla</h2>
+      </div>
+
+      <div class="card rules">
+        <p>✅ Přesný výsledek = <strong>3 body</strong></p>
+        <p>🎯 Nejbližší tip = <strong>1 bod</strong></p>
+        <p>Pokud je nejbližších tipů více, 1 bod získají všichni nejbližší hráči.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>🏒 MS Tipovačka 2026 · vytvořeno pro partu hokejových expertů od gauče</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
