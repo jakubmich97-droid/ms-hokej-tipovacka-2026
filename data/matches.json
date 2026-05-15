@@ -5,54 +5,22 @@
     "resultHome": 4,
     "resultAway": 2,
     "tips": [
-      {
-        "name": "Kuba",
-        "home": 6,
-        "away": 3
-      },
-      {
-        "name": "Dejv",
-        "home": 3,
-        "away": 2
-      },
-      {
-        "name": "Jiřoch",
-        "home": 2,
-        "away": 1
-      },
-      {
-        "name": "Luba",
-        "home": 4,
-        "away": 2
-      }
+      { "name": "Kuba", "home": 6, "away": 3 },
+      { "name": "Dejv", "home": 3, "away": 2 },
+      { "name": "Jiřoch", "home": 2, "away": 1 },
+      { "name": "Luba", "home": 4, "away": 2 }
     ]
   },
-[
   {
     "home": "Kanada",
     "away": "Švédsko",
     "resultHome": 5,
     "resultAway": 2,
     "tips": [
-      {
-        "name": "Kuba",
-        "home": 6,
-        "away": 3
-      },
-      {
-        "name": "Dejv",
-        "home": 3,
-        "away": 2
-      },
-      {
-        "name": "Jiřoch",
-        "home": 4,
-        "away": 2
-      },
-      {
-        "name": "Luba",
-        "home": 4,
-        "away": 1
-      }
+      { "name": "Kuba", "home": 6, "away": 3 },
+      { "name": "Dejv", "home": 3, "away": 2 },
+      { "name": "Jiřoch", "home": 4, "away": 2 },
+      { "name": "Luba", "home": 4, "away": 1 }
     ]
-  },
+  }
+]
