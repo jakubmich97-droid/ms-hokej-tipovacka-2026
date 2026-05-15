@@ -27,7 +27,7 @@
     "home": "Česko",
     "away": "Dánsko",
     "resultHome": 3,
-    "resultAway": 0,
+    "resultAway": 1,
     "tips": [
       { "name": "Kuba", "home": 5, "away": 2 },
       { "name": "Dejv", "home": 3, "away": 2 },
