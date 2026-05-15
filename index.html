@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+          leaderboard[tip.name].points += 1;
+        }
+      });
+    });
+
+    const sortedPlayers = Object.entries(leaderboard)
+      .sort((a, b) => b[1].points - a[1].points);
+
+    const leaderboardBody = document.querySelector("#leaderboard tbody");
+
+    sortedPlayers.forEach((player, index) => {
+      const tr = document.createElement("tr");
+
+      let className = "";
+
+      if (index === 0) className = "gold";
+      if (index === 1) className = "silver";
+      if (index === 2) className = "bronze";
+
+      tr.innerHTML = `
+        <td class="${className}">${index + 1}</td>
+        <td>${player[0]}</td>
+        <td>${player[1].points}</td>
+        <td>${player[1].exact}</td>
+      `;
+
+      leaderboardBody.appendChild(tr);
+    });
+
+    const matchesContainer = document.getElementById("matches");
+
+    matches.forEach(match => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="match-title">
+          ${match.home} vs ${match.away}
+        </div>
+
+        <div class="result">
+          ${match.resultHome} : ${match.resultAway}
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Hráč</th>
+              <th>Tip</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${match.tips.map(tip => `
+              <tr>
+                <td>${tip.name}</td>
+                <td>${tip.home}:${tip.away}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+
+      matchesContainer.appendChild(card);
+    });
+
+  </script>
+
+</body>
+</html>
