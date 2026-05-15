@@ -29,16 +29,7 @@ function startApp(matches) {
         tip.away === match.resultAway;
     });
 
-    const nonExactTips = match.tips.filter(tip => !tip.isExact);
-    const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
-
-    const tipsForClosest =
-      correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
-
-    const bestDistance =
-      tipsForClosest.length > 0
-        ? Math.min(...tipsForClosest.map(tip => tip.distance))
-        : null;
+    const closestTips = getClosestTipsForMatch(match);
 
     match.tips.forEach(tip => {
       if (!leaderboard[tip.name]) {
@@ -52,10 +43,7 @@ function startApp(matches) {
         leaderboard[tip.name].points += 3;
         leaderboard[tip.name].exact += 1;
         totalExact++;
-      } else if (
-        tipsForClosest.includes(tip) &&
-        tip.distance === bestDistance
-      ) {
+      } else if (closestTips.includes(tip)) {
         leaderboard[tip.name].points += 1;
       }
     });
@@ -78,6 +66,28 @@ function getWinner(home, away) {
   if (home > away) return "home";
   if (away > home) return "away";
   return "draw";
+}
+
+function getClosestTipsForMatch(match) {
+  const exactExists = match.tips.some(tip => tip.isExact);
+
+  if (exactExists) {
+    return [];
+  }
+
+  const nonExactTips = match.tips.filter(tip => !tip.isExact);
+  const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
+
+  const tipsForClosest =
+    correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
+
+  if (tipsForClosest.length === 0) {
+    return [];
+  }
+
+  const bestDistance = Math.min(...tipsForClosest.map(tip => tip.distance));
+
+  return tipsForClosest.filter(tip => tip.distance === bestDistance);
 }
 
 function renderLeaderboard(players) {
@@ -163,26 +173,11 @@ function renderMatches(matches) {
   });
 }
 
-function getClosestTipsForMatch(match) {
-  const nonExactTips = match.tips.filter(tip => !tip.isExact);
-  const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
-
-  const tipsForClosest =
-    correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
-
-  if (tipsForClosest.length === 0) {
-    return [];
-  }
-
-  const bestDistance = Math.min(...tipsForClosest.map(tip => tip.distance));
-
-  return tipsForClosest.filter(tip => tip.distance === bestDistance);
-}
-
 function renderStats(matches, players, totalExact) {
   document.getElementById("players-count").textContent = players.length;
   document.getElementById("matches-count").textContent = matches.length;
   document.getElementById("exact-count").textContent = totalExact;
+
   document.getElementById("current-leader").textContent =
     players.length > 0 ? players[0][0] : "-";
 }
