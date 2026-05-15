@@ -50,7 +50,7 @@ function startApp(matches) {
   });
 
   const sortedPlayers = Object.entries(leaderboard).sort((a, b) => {
-    return b[1].points - a[1].points || b[1].exact - a[1].exact;
+    return b[1].points - a[1].points;
   });
 
   renderLeaderboard(sortedPlayers);
@@ -90,6 +90,26 @@ function getClosestTipsForMatch(match) {
   return tipsForClosest.filter(tip => tip.distance === bestDistance);
 }
 
+function getPositionText(players, index) {
+  const currentPoints = players[index][1].points;
+
+  const samePointPlayers = players.filter(player => {
+    return player[1].points === currentPoints;
+  });
+
+  if (samePointPlayers.length === 1) {
+    return `${index + 1}`;
+  }
+
+  const firstIndex = players.findIndex(player => {
+    return player[1].points === currentPoints;
+  });
+
+  const lastIndex = firstIndex + samePointPlayers.length - 1;
+
+  return `${firstIndex + 1}/${lastIndex + 1}`;
+}
+
 function renderLeaderboard(players) {
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = "";
@@ -105,8 +125,10 @@ function renderLeaderboard(players) {
     if (index === 1) rankClass = "rank-2";
     if (index === 2) rankClass = "rank-3";
 
+    const positionText = getPositionText(players, index);
+
     row.innerHTML = `
-      <td class="${rankClass}">${index + 1}</td>
+      <td class="${rankClass}">${positionText}</td>
       <td>${name}</td>
       <td>${data.points}</td>
       <td>${data.exact}</td>
