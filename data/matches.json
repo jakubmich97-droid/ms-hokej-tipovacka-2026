@@ -26,7 +26,7 @@
   {
     "home": "Česko",
     "away": "Dánsko",
-    "resultHome": 2,
+    "resultHome": 3,
     "resultAway": 0,
     "tips": [
       { "name": "Kuba", "home": 5, "away": 2 },
@@ -38,7 +38,7 @@
     {
     "home": "USA",
     "away": "Švýcarsko",
-    "resultHome": 0,
+    "resultHome": 1,
     "resultAway": 2,
     "tips": [
       { "name": "Kuba", "home": 2, "away": 4 },
