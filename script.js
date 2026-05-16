@@ -227,14 +227,14 @@ function createMatchCard(match, played) {
       <div class="teams">
       
         <div class="team">
-          <img src="./images/flags/${match.homeFlag}.png" class="flag">
+          <img src="./images/flags/${match.homeFlag}.webp" class="flag">
           <span>${match.home}</span>
         </div>
       
         <span class="vs-text">vs</span>
       
         <div class="team">
-          <img src="./images/flags/${match.awayFlag}.png" class="flag">
+          <img src="./images/flags/${match.awayFlag}.webp" class="flag">
           <span>${match.away}</span>
         </div>
       
