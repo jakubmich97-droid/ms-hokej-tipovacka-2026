@@ -776,3 +776,92 @@ footer {
     font-size: 12px;
   }
 }
+.submit-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.submit-card {
+  width: 100%;
+  max-width: 720px;
+}
+
+.submit-card h1 {
+  margin-bottom: 12px;
+}
+
+.submit-subtitle {
+  color: #94a3b8;
+  margin-bottom: 28px;
+}
+
+#tip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#tip-form label {
+  color: #cbd5e1;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+#tip-form input,
+#tip-form select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+
+  font-size: 16px;
+}
+
+#tip-form input:focus,
+#tip-form select:focus {
+  outline: none;
+  border-color: rgba(125, 211, 252, 0.6);
+  box-shadow: 0 0 18px rgba(14, 165, 233, 0.18);
+}
+
+.score-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+#tip-form button {
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #2563eb
+  );
+
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#tip-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.28);
+}
+
+#submit-status {
+  margin-top: 12px;
+  font-weight: 700;
+}
