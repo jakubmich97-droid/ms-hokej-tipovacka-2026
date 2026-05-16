@@ -390,9 +390,12 @@ const datasets = players.map(player => {
 
     tension: 0.35,
     borderWidth: 4,
+    
+    fill: false,
 
     pointRadius: 5,
     pointHoverRadius: 8,
+    pointHoverBorderWidth: 4,
 
     pointBackgroundColor: color,
     pointBorderColor: "#020617",
