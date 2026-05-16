@@ -431,15 +431,19 @@ function renderStats(
     document.getElementById("current-leader");
 
   if (players.length > 0) {
-
+    const topPoints = players[0][1].points;
+  
+    const leaders = players
+      .filter(player => player[1].points === topPoints)
+      .map(player => player[0]);
+  
     leaderElement.innerHTML = `
       <span class="leader-badge">
-        👑 ${players[0][0]}
+        👑 ${leaders.join(" / ")}
       </span>
     `;
-
+  
   } else {
-
     leaderElement.textContent = "-";
   }
 }
