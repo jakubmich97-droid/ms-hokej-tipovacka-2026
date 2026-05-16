@@ -58,6 +58,7 @@ function startApp(matches, lastUpdate) {
   renderMatches(matches);
   renderStats(matches, sortedPlayers, totalExact);
   renderLastUpdate(lastUpdate);
+  renderPointsChart(matches);
 }
 
 function getDistance(
@@ -315,4 +316,118 @@ function renderLastUpdate(lastUpdate) {
 
   element.textContent =
     `Poslední aktualizace: ${lastUpdate}`;
+}
+function renderPointsChart(matches) {
+  const canvas = document.getElementById("pointsChart");
+
+  if (!canvas) return;
+
+  const sortedMatches = [...matches].sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  const players = [];
+
+  sortedMatches.forEach(match => {
+    match.tips.forEach(tip => {
+      if (!players.includes(tip.name)) {
+        players.push(tip.name);
+      }
+    });
+  });
+
+  const pointsByPlayer = {};
+
+  players.forEach(player => {
+    pointsByPlayer[player] = 0;
+  });
+
+  const labels = [];
+  const history = {};
+
+  players.forEach(player => {
+    history[player] = [];
+  });
+
+  sortedMatches.forEach(match => {
+    const label = `${match.home} vs ${match.away}`;
+    labels.push(label);
+
+    match.tips.forEach(tip => {
+      if (tip.isExact) {
+        pointsByPlayer[tip.name] += 3;
+      } else {
+        const closestTips = getClosestTipsForMatch(match);
+
+        if (closestTips.includes(tip)) {
+          pointsByPlayer[tip.name] += 1;
+        }
+      }
+    });
+
+    players.forEach(player => {
+      history[player].push(pointsByPlayer[player]);
+    });
+  });
+
+  const datasets = players.map(player => {
+    return {
+      label: player,
+      data: history[player],
+      tension: 0.35,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 7
+    };
+  });
+
+  new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "#e0f2fe"
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.dataset.label}: ${context.parsed.y} bodů`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#94a3b8"
+          },
+          grid: {
+            color: "rgba(148, 163, 184, 0.12)"
+          }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#94a3b8",
+            stepSize: 1
+          },
+          grid: {
+            color: "rgba(148, 163, 184, 0.12)"
+          }
+        }
+      }
+    }
+  });
 }
