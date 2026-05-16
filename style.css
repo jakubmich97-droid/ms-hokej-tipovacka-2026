@@ -330,3 +330,11 @@ footer {
   letter-spacing: 0.06em;
   margin-bottom: 6px;
 }
+
+
+.last-update {
+  margin-top: 12px;
+  color: #7dd3fc;
+  font-size: 14px;
+  opacity: 0.85;
+}
