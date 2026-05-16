@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-16 18:31",
+  "lastUpdate": "2026-05-16 18:44",
 
   "matches": [
     {
@@ -117,8 +117,8 @@
       "homeFlag": "it",
       "away": "Kanada",
       "awayFlag": "ca",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 0,
+      "resultAway": 6,
 
       "tips": [
         { "name": "Kuba", "home": 2, "away": 8 },
