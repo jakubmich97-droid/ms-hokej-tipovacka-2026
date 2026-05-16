@@ -30,7 +30,8 @@ function startApp(matches, lastUpdate) {
         match.resultAway
       );
 
-      tip.correctWinner = getWinner(tip.home, tip.away) === realWinner;
+      tip.correctWinner =
+        getWinner(tip.home, tip.away) === realWinner;
 
       tip.isExact =
         tip.home === match.resultHome &&
@@ -40,12 +41,20 @@ function startApp(matches, lastUpdate) {
     const closestTips = getClosestTipsForMatch(match);
 
     match.tips.forEach(tip => {
+
       if (!leaderboard[tip.name]) {
         leaderboard[tip.name] = {
           points: 0,
-          exact: 0
+          exact: 0,
+          totalTipGoals: 0,
+          tipsCount: 0
         };
       }
+
+      leaderboard[tip.name].totalTipGoals +=
+        tip.home + tip.away;
+
+      leaderboard[tip.name].tipsCount += 1;
 
       if (tip.isExact) {
         leaderboard[tip.name].points += 3;
@@ -68,44 +77,69 @@ function startApp(matches, lastUpdate) {
   renderPointsChart(matches);
 }
 
-function getDistance(tipHome, tipAway, resultHome, resultAway) {
-  return Math.abs(tipHome - resultHome) + Math.abs(tipAway - resultAway);
+function getDistance(
+  tipHome,
+  tipAway,
+  resultHome,
+  resultAway
+) {
+  return (
+    Math.abs(tipHome - resultHome) +
+    Math.abs(tipAway - resultAway)
+  );
 }
 
 function getWinner(home, away) {
   if (home > away) return "home";
   if (away > home) return "away";
+
   return "draw";
 }
 
 function getClosestTipsForMatch(match) {
+
   if (!isMatchPlayed(match)) {
     return [];
   }
 
-  const exactExists = match.tips.some(tip => tip.isExact);
+  const exactExists = match.tips.some(
+    tip => tip.isExact
+  );
 
   if (exactExists) {
     return [];
   }
 
-  const nonExactTips = match.tips.filter(tip => !tip.isExact);
-  const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
+  const nonExactTips = match.tips.filter(
+    tip => !tip.isExact
+  );
+
+  const correctWinnerTips = nonExactTips.filter(
+    tip => tip.correctWinner
+  );
 
   const tipsForClosest =
-    correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
+    correctWinnerTips.length > 0
+      ? correctWinnerTips
+      : nonExactTips;
 
   if (tipsForClosest.length === 0) {
     return [];
   }
 
-  const bestDistance = Math.min(...tipsForClosest.map(tip => tip.distance));
+  const bestDistance = Math.min(
+    ...tipsForClosest.map(tip => tip.distance)
+  );
 
-  return tipsForClosest.filter(tip => tip.distance === bestDistance);
+  return tipsForClosest.filter(
+    tip => tip.distance === bestDistance
+  );
 }
 
 function getPositionText(players, index) {
-  const currentPoints = players[index][1].points;
+
+  const currentPoints =
+    players[index][1].points;
 
   const samePointPlayers = players.filter(player => {
     return player[1].points === currentPoints;
@@ -119,12 +153,14 @@ function getPositionText(players, index) {
     return player[1].points === currentPoints;
   });
 
-  const lastIndex = firstIndex + samePointPlayers.length - 1;
+  const lastIndex =
+    firstIndex + samePointPlayers.length - 1;
 
   return `${firstIndex + 1}/${lastIndex + 1}`;
 }
 
 function formatDate(dateString) {
+
   if (!dateString) return "";
 
   const date = new Date(dateString);
@@ -137,29 +173,55 @@ function formatDate(dateString) {
 }
 
 function renderLeaderboard(players) {
-  const tbody = document.querySelector("#leaderboard tbody");
+
+  const tbody = document.querySelector(
+    "#leaderboard tbody"
+  );
+
   tbody.innerHTML = "";
 
   players.forEach((player, index) => {
+
     const name = player[0];
     const data = player[1];
 
     const row = document.createElement("tr");
 
     let rankClass = "";
+
     if (index === 0) rankClass = "rank-1";
     if (index === 1) rankClass = "rank-2";
     if (index === 2) rankClass = "rank-3";
 
-    const positionText = getPositionText(players, index);
+    const positionText =
+      getPositionText(players, index);
+
+    const avgGoals =
+      (
+        data.totalTipGoals /
+        data.tipsCount
+      ).toFixed(1);
 
     row.innerHTML = `
       <td class="${rankClass}">
         ${positionText}
       </td>
-      <td>${name}</td>
-      <td>${data.points}</td>
-      <td>${data.exact}</td>
+
+      <td>
+        ${name}
+      </td>
+
+      <td>
+        ${data.points}
+      </td>
+
+      <td>
+        ${data.exact}
+      </td>
+
+      <td>
+        ${avgGoals}
+      </td>
     `;
 
     tbody.appendChild(row);
@@ -167,58 +229,113 @@ function renderLeaderboard(players) {
 }
 
 function renderMatches(matches) {
-  const playedContainer = document.getElementById("played-matches");
-  const upcomingContainer = document.getElementById("upcoming-matches");
+
+  const playedContainer =
+    document.getElementById("played-matches");
+
+  const upcomingContainer =
+    document.getElementById("upcoming-matches");
 
   playedContainer.innerHTML = "";
   upcomingContainer.innerHTML = "";
 
-  const playedMatches = matches.filter(isMatchPlayed);
-  const upcomingMatches = matches.filter(match => !isMatchPlayed(match));
+  const playedMatches =
+    matches.filter(isMatchPlayed);
+
+  const upcomingMatches =
+    matches.filter(match => !isMatchPlayed(match));
 
   playedMatches.forEach(match => {
-    playedContainer.appendChild(createMatchCard(match, true));
+    playedContainer.appendChild(
+      createMatchCard(match, true)
+    );
   });
 
   upcomingMatches.forEach(match => {
-    upcomingContainer.appendChild(createMatchCard(match, false));
+    upcomingContainer.appendChild(
+      createMatchCard(match, false)
+    );
   });
 
   if (playedMatches.length === 0) {
-    playedContainer.innerHTML = `<div class="card rules">Zatím nejsou žádné odehrané zápasy.</div>`;
+    playedContainer.innerHTML = `
+      <div class="card rules">
+        Zatím nejsou žádné odehrané zápasy.
+      </div>
+    `;
   }
 
   if (upcomingMatches.length === 0) {
-    upcomingContainer.innerHTML = `<div class="card rules">Žádné nadcházející zápasy.</div>`;
+    upcomingContainer.innerHTML = `
+      <div class="card rules">
+        Žádné nadcházející zápasy.
+      </div>
+    `;
   }
 }
+
 function createMatchCard(match, played) {
-  const closestTips = played ? getClosestTipsForMatch(match) : [];
-  const resultText = played ? `${match.resultHome}:${match.resultAway}` : "čeká se";
+
+  const closestTips =
+    played
+      ? getClosestTipsForMatch(match)
+      : [];
+
+  const resultText =
+    played
+      ? `${match.resultHome}:${match.resultAway}`
+      : "čeká se";
 
   const tipsHtml = match.tips.map(tip => {
-    let badge = `<span class="badge badge-zero">${played ? "0 bodů" : "nehráno"}</span>`;
+
+    let badge = `
+      <span class="badge badge-zero">
+        ${played ? "0 bodů" : "nehráno"}
+      </span>
+    `;
 
     if (played && tip.isExact) {
-      badge = `<span class="badge badge-exact">+3 body</span>`;
-    } else if (played && closestTips.includes(tip)) {
-      badge = `<span class="badge badge-close">+1 bod</span>`;
+
+      badge = `
+        <span class="badge badge-exact">
+          +3 body
+        </span>
+      `;
+
+    } else if (
+      played &&
+      closestTips.includes(tip)
+    ) {
+
+      badge = `
+        <span class="badge badge-close">
+          +1 bod
+        </span>
+      `;
     }
 
     return `
       <tr>
         <td>${tip.name}</td>
-        <td>${tip.home}:${tip.away}</td>
-        <td>${badge}</td>
+
+        <td>
+          ${tip.home}:${tip.away}
+        </td>
+
+        <td>
+          ${badge}
+        </td>
       </tr>
     `;
+
   }).join("");
 
   const card = document.createElement("div");
 
-  card.className = played
-    ? "match-card"
-    : "match-card match-card-upcoming";
+  card.className =
+    played
+      ? "match-card"
+      : "match-card match-card-upcoming";
 
   card.innerHTML = `
     <div class="match-header">
@@ -232,14 +349,17 @@ function createMatchCard(match, played) {
         <div class="match-scoreline">
 
           <div class="team-side">
+
             <img
               src="./images/flags/${match.homeFlag}.webp"
               class="flag"
+              alt="${match.home}"
             >
 
             <span class="team-name">
               ${match.home}
             </span>
+
           </div>
 
           <div class="score-pill">
@@ -247,14 +367,17 @@ function createMatchCard(match, played) {
           </div>
 
           <div class="team-side">
+
             <img
               src="./images/flags/${match.awayFlag}.webp"
               class="flag"
+              alt="${match.away}"
             >
 
             <span class="team-name">
               ${match.away}
             </span>
+
           </div>
 
         </div>
@@ -264,6 +387,7 @@ function createMatchCard(match, played) {
     </div>
 
     <table>
+
       <thead>
         <tr>
           <th>Hráč</th>
@@ -275,102 +399,156 @@ function createMatchCard(match, played) {
       <tbody>
         ${tipsHtml}
       </tbody>
+
     </table>
   `;
 
   return card;
 }
-function renderStats(matches, players, totalExact) {
-  const playedMatches = matches.filter(isMatchPlayed);
 
-  document.getElementById("players-count").textContent = players.length;
-  document.getElementById("matches-count").textContent = playedMatches.length;
-  document.getElementById("exact-count").textContent = totalExact;
+function renderStats(
+  matches,
+  players,
+  totalExact
+) {
 
-  const leaderElement = document.getElementById("current-leader");
+  const playedMatches =
+    matches.filter(isMatchPlayed);
+
+  document.getElementById(
+    "players-count"
+  ).textContent = players.length;
+
+  document.getElementById(
+    "matches-count"
+  ).textContent = playedMatches.length;
+
+  document.getElementById(
+    "exact-count"
+  ).textContent = totalExact;
+
+  const leaderElement =
+    document.getElementById("current-leader");
 
   if (players.length > 0) {
+
     leaderElement.innerHTML = `
       <span class="leader-badge">
         👑 ${players[0][0]}
       </span>
     `;
+
   } else {
+
     leaderElement.textContent = "-";
   }
 }
 
 function renderLastUpdate(lastUpdate) {
-  const element = document.getElementById("last-update");
+
+  const element =
+    document.getElementById("last-update");
 
   if (!element) return;
 
-  element.textContent = `Poslední aktualizace: ${lastUpdate}`;
+  element.textContent =
+    `Poslední aktualizace: ${lastUpdate}`;
 }
 
 function renderPointsChart(matches) {
-  const canvas = document.getElementById("pointsChart");
+
+  const canvas =
+    document.getElementById("pointsChart");
 
   if (!canvas) return;
 
   const playedMatches = [...matches]
     .filter(isMatchPlayed)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .sort((a, b) =>
+      new Date(a.date) - new Date(b.date)
+    );
 
   const players = [];
 
   playedMatches.forEach(match => {
+
     match.tips.forEach(tip => {
+
       if (!players.includes(tip.name)) {
         players.push(tip.name);
       }
+
     });
+
   });
 
   const matchesByDate = {};
 
   playedMatches.forEach(match => {
+
     if (!matchesByDate[match.date]) {
       matchesByDate[match.date] = [];
     }
 
     matchesByDate[match.date].push(match);
+
   });
 
-  const dates = Object.keys(matchesByDate).sort((a, b) => {
-    return new Date(a) - new Date(b);
-  });
+  const dates = Object.keys(matchesByDate)
+    .sort((a, b) =>
+      new Date(a) - new Date(b)
+    );
 
   const pointsByPlayer = {};
   const history = {};
 
   players.forEach(player => {
+
     pointsByPlayer[player] = 0;
     history[player] = [];
+
   });
 
-  const labels = dates.map(date => formatDate(date));
+  const labels = dates.map(date =>
+    formatDate(date)
+  );
 
   dates.forEach(date => {
-    const dayMatches = matchesByDate[date];
+
+    const dayMatches =
+      matchesByDate[date];
 
     dayMatches.forEach(match => {
+
       match.tips.forEach(tip => {
+
         if (tip.isExact) {
+
           pointsByPlayer[tip.name] += 3;
+
         } else {
-          const closestTips = getClosestTipsForMatch(match);
+
+          const closestTips =
+            getClosestTipsForMatch(match);
 
           if (closestTips.includes(tip)) {
             pointsByPlayer[tip.name] += 1;
           }
+
         }
+
       });
+
     });
 
     players.forEach(player => {
-      history[player].push(pointsByPlayer[player]);
+
+      history[player].push(
+        pointsByPlayer[player]
+      );
+
     });
+
   });
 
   const playerColors = {
@@ -381,53 +559,74 @@ function renderPointsChart(matches) {
   };
 
   const datasets = players.map(player => {
-    const color = playerColors[player] || "#ffffff";
+
+    const color =
+      playerColors[player] || "#ffffff";
 
     return {
       label: player,
       data: history[player],
+
       borderColor: color,
       backgroundColor: color,
+
       tension: 0.35,
       borderWidth: 4,
+
       fill: false,
+
       pointRadius: 5,
       pointHoverRadius: 8,
       pointHoverBorderWidth: 4,
+
       pointBackgroundColor: color,
       pointBorderColor: "#020617",
       pointBorderWidth: 2
     };
+
   });
 
   new Chart(canvas, {
+
     type: "line",
+
     data: {
       labels,
       datasets
     },
+
     options: {
+
       responsive: true,
       maintainAspectRatio: false,
+
       interaction: {
         mode: "index",
         intersect: false
       },
+
       plugins: {
+
         legend: {
           labels: {
             color: "#e0f2fe"
           }
         },
+
         tooltip: {
           callbacks: {
             label: function(context) {
-              return `${context.dataset.label}: ${context.parsed.y} bodů`;
+              return `
+                ${context.dataset.label}:
+                ${context.parsed.y} bodů
+              `;
             }
           }
         }
       },
+
       scales: {
+
         x: {
           ticks: {
             color: "#94a3b8"
@@ -436,6 +635,7 @@ function renderPointsChart(matches) {
             color: "rgba(148, 163, 184, 0.12)"
           }
         },
+
         y: {
           beginAtZero: true,
           ticks: {
