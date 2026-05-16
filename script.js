@@ -224,11 +224,22 @@ function createMatchCard(match, played) {
           ${formatDate(match.date)}
         </div>
 
-        <div class="match-title">
-          ${match.home} vs ${match.away}
+      <div class="teams">
+      
+        <div class="team">
+          <img src="./images/flags/${match.homeFlag}.png" class="flag">
+          <span>${match.home}</span>
         </div>
+      
+        <span class="vs-text">vs</span>
+      
+        <div class="team">
+          <img src="./images/flags/${match.awayFlag}.png" class="flag">
+          <span>${match.away}</span>
+        </div>
+      
       </div>
-
+    
       <div class="match-result">
         ${resultText}
       </div>
