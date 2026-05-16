@@ -96,8 +96,8 @@
       "date": "2026-05-16",
       "home": "Itálie",
       "away": "Kanada",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 2, "away": 8 },
