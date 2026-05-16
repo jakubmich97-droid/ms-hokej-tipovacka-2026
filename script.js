@@ -215,34 +215,52 @@ function createMatchCard(match, played) {
   }).join("");
 
   const card = document.createElement("div");
-  card.className = played ? "match-card" : "match-card match-card-upcoming";
+
+  card.className = played
+    ? "match-card"
+    : "match-card match-card-upcoming";
 
   card.innerHTML = `
     <div class="match-header">
+
       <div>
+
         <div class="match-date">
           ${formatDate(match.date)}
         </div>
 
-      <div class="teams">
-      
-        <div class="team">
-          <img src="./images/flags/${match.homeFlag}.webp" class="flag">
-          <span>${match.home}</span>
+        <div class="match-scoreline">
+
+          <div class="team-side">
+            <img
+              src="./images/flags/${match.homeFlag}.webp"
+              class="flag"
+            >
+
+            <span class="team-name">
+              ${match.home}
+            </span>
+          </div>
+
+          <div class="score-pill">
+            ${resultText}
+          </div>
+
+          <div class="team-side">
+            <img
+              src="./images/flags/${match.awayFlag}.webp"
+              class="flag"
+            >
+
+            <span class="team-name">
+              ${match.away}
+            </span>
+          </div>
+
         </div>
-      
-        <span class="vs-text">vs</span>
-      
-        <div class="team">
-          <img src="./images/flags/${match.awayFlag}.webp" class="flag">
-          <span>${match.away}</span>
-        </div>
-      
+
       </div>
-    
-      <div class="match-result">
-        ${resultText}
-      </div>
+
     </div>
 
     <table>
@@ -253,6 +271,7 @@ function createMatchCard(match, played) {
           <th>Body</th>
         </tr>
       </thead>
+
       <tbody>
         ${tipsHtml}
       </tbody>
