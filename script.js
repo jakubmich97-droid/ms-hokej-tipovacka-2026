@@ -255,18 +255,32 @@ function renderPointsChart(matches) {
 
   if (!canvas) return;
 
-  const sortedMatches = [...matches]
+  const playedMatches = [...matches]
     .filter(isMatchPlayed)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
   const players = [];
 
-  sortedMatches.forEach(match => {
+  playedMatches.forEach(match => {
     match.tips.forEach(tip => {
       if (!players.includes(tip.name)) {
         players.push(tip.name);
       }
     });
+  });
+
+  const matchesByDate = {};
+
+  playedMatches.forEach(match => {
+    if (!matchesByDate[match.date]) {
+      matchesByDate[match.date] = [];
+    }
+
+    matchesByDate[match.date].push(match);
+  });
+
+  const dates = Object.keys(matchesByDate).sort((a, b) => {
+    return new Date(a) - new Date(b);
   });
 
   const pointsByPlayer = {};
@@ -277,21 +291,23 @@ function renderPointsChart(matches) {
     history[player] = [];
   });
 
-  const labels = [];
+  const labels = dates.map(date => formatDate(date));
 
-  sortedMatches.forEach(match => {
-    labels.push(`${match.home} vs ${match.away}`);
+  dates.forEach(date => {
+    const dayMatches = matchesByDate[date];
 
-    match.tips.forEach(tip => {
-      if (tip.isExact) {
-        pointsByPlayer[tip.name] += 3;
-      } else {
-        const closestTips = getClosestTipsForMatch(match);
+    dayMatches.forEach(match => {
+      match.tips.forEach(tip => {
+        if (tip.isExact) {
+          pointsByPlayer[tip.name] += 3;
+        } else {
+          const closestTips = getClosestTipsForMatch(match);
 
-        if (closestTips.includes(tip)) {
-          pointsByPlayer[tip.name] += 1;
+          if (closestTips.includes(tip)) {
+            pointsByPlayer[tip.name] += 1;
+          }
         }
-      }
+      });
     });
 
     players.forEach(player => {
