@@ -7,6 +7,7 @@
   <title>MS Tipovačka 2026</title>
 
   <link rel="stylesheet" href="style.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -17,38 +18,77 @@
       <h1>MS Tipovačka 2026</h1>
       <p class="subtitle">Kdo má nejlepší hokejový čuch?</p>
       <p class="last-update" id="last-update"></p>
-          <nav class="top-nav">
-      <a href="./index.html" class="nav-link active">
-        🏒 Tipovačka
-      </a>
-    
-      <a href="./worlds.html" class="nav-link">
-        🌍 MS podle tipérů
-      </a>
-    </nav>
+
+      <nav class="top-nav">
+        <a href="./index.html" class="nav-link active">🏒 Tipovačka</a>
+        <a href="./worlds.html" class="nav-link">🌍 MS podle tipérů</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-label">Tipéři</span>
-        <strong id="players-count">0</strong>
+    <section class="stats-panel">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Tipéři</span>
+          <strong id="players-count">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Zápasy</span>
+          <strong id="matches-count">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Přesné trefy</span>
+          <strong id="exact-count">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Aktuální lídr</span>
+          <strong id="current-leader">-</strong>
+        </div>
       </div>
 
-      <div class="stat-card">
-        <span class="stat-label">Zápasy</span>
-        <strong id="matches-count">0</strong>
-      </div>
+      <div class="daily-awards">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/cards/tiper-dne.png" alt="Tipér dne">
+            </div>
 
-      <div class="stat-card">
-        <span class="stat-label">Přesné trefy</span>
-        <strong id="exact-count">0</strong>
-      </div>
+            <div class="flip-card-back">
+              <span>🏆 Tipér dne</span>
+              <strong id="daily-best">-</strong>
+            </div>
+          </div>
+        </div>
 
-      <div class="stat-card">
-        <span class="stat-label">Aktuální lídr</span>
-        <strong id="current-leader">-</strong>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/cards/smolar-dne.png" alt="Smolař dne">
+            </div>
+
+            <div class="flip-card-back">
+              <span>😬 Smolař dne</span>
+              <strong id="daily-worst">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/cards/ostrostrelec.png" alt="Ostrostřelec">
+            </div>
+
+            <div class="flip-card-back">
+              <span>🎯 Ostrostřelec</span>
+              <strong id="daily-sharpshooter">-</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -73,28 +113,30 @@
         </table>
       </div>
     </section>
+
     <section class="section">
       <div class="section-header">
         <h2>📈 Vývoj bodů</h2>
         <p>Jak se hráčům postupně vyvíjelo skóre v tipovačce.</p>
       </div>
-    
+
       <div class="card chart-card">
         <canvas id="pointsChart"></canvas>
       </div>
     </section>
-<section class="section">
-  <div class="section-header">
-    <h2>📋 Zápasy</h2>
-    <p>Přehled odehraných a nadcházejících zápasů.</p>
-  </div>
 
-  <h3 class="subsection-title">✅ Odehrané zápasy</h3>
-  <div id="played-matches" class="matches-list"></div>
+    <section class="section">
+      <div class="section-header">
+        <h2>📋 Zápasy</h2>
+        <p>Přehled odehraných a nadcházejících zápasů.</p>
+      </div>
 
-  <h3 class="subsection-title upcoming-title">⏳ Nadcházející zápasy</h3>
-  <div id="upcoming-matches" class="matches-list"></div>
-</section>
+      <h3 class="subsection-title">✅ Odehrané zápasy</h3>
+      <div id="played-matches" class="matches-list"></div>
+
+      <h3 class="subsection-title upcoming-title">⏳ Nadcházející zápasy</h3>
+      <div id="upcoming-matches" class="matches-list"></div>
+    </section>
 
     <section class="section">
       <div class="section-header">
@@ -103,8 +145,23 @@
 
       <div class="card rules">
         <p>✅ Přesný výsledek = <strong>3 body</strong></p>
-        <p>🎯 Nejbližší tip = <strong>1 bod</strong></p>
-        <p>Pokud je nejbližších tipů více, 1 bod získají všichni nejbližší hráči.</p>
+        <p>🎯 Nejbližší skóre = <strong>1 bod</strong></p>
+
+        <hr class="rules-divider">
+
+        <p>
+          Pokud nikdo netrefí přesný výsledek, hledá se nejbližší tip.
+          Nejbližší tip se určuje podle rozdílu mezi tipovaným a skutečným skóre obou týmů.
+        </p>
+
+        <p>
+          Nejbližší tip se nejdříve hledá pouze mezi tipy, které správně určily vítěze zápasu.
+          Pokud má více hráčů stejně blízký tip, získají 1 bod všichni.
+        </p>
+
+        <p>
+          Pokud alespoň jeden hráč trefí přesný výsledek, bod za nejbližší skóre se už v daném zápase nerozdává.
+        </p>
       </div>
     </section>
   </main>
