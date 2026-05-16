@@ -15,7 +15,7 @@ body {
       rgba(2, 6, 23, 0.90),
       rgba(2, 6, 23, 0.92)
     ),
-    url("./images/rink.webp");
+    url("./images/rink.png");
 
   background-size: cover;
   background-position: center;
@@ -32,15 +32,6 @@ body::before {
     linear-gradient(120deg, rgba(255,255,255,0.15) 1px, transparent 1px),
     linear-gradient(60deg, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 90px 90px;
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  backdrop-filter: blur(3px);
-
-  pointer-events: none;
 }
 
 .hero {
