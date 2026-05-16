@@ -322,3 +322,11 @@ footer {
     font-size: 26px;
   }
 }
+.match-date {
+  color: #7dd3fc;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
