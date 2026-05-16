@@ -22,7 +22,7 @@
     {
       "date": "2026-05-15",
       "home": "Kanada",
-      "awayFlag": "ca",
+      "homeFlag": "ca",
       "away": "Švédsko",
       "awayFlag": "se",
       "resultHome": 5,
@@ -39,7 +39,7 @@
     {
       "date": "2026-05-15",
       "home": "Česko",
-      "awayFlag": "cz",
+      "homeFlag": "cz",
       "away": "Dánsko",
       "awayFlag": "dk",
       "resultHome": 4,
@@ -56,7 +56,9 @@
     {
       "date": "2026-05-15",
       "home": "USA",
+      "homeFlag": "us",
       "away": "Švýcarsko",
+      "awayFlag": "ch",
       "resultHome": 1,
       "resultAway": 3,
 
@@ -71,7 +73,9 @@
     {
       "date": "2026-05-16",
       "home": "Slovensko",
+      "homeFlag": "sk",
       "away": "Norsko",
+      "awayFlag": "no",
       "resultHome": "-",
       "resultAway": "-",
 
@@ -86,7 +90,9 @@
     {
       "date": "2026-05-16",
       "home": "Velká Británie",
+      "homeFlag": "gb",
       "away": "Rakousko",
+      "awayFlag": "at",
       "resultHome": "-",
       "resultAway": "-",
 
@@ -101,7 +107,9 @@
     {
       "date": "2026-05-16",
       "home": "Itálie",
+      "homeFlag": "it",
       "away": "Kanada",
+      "awayFlag": "ca",
       "resultHome": "-",
       "resultAway": "-",
 
@@ -116,7 +124,9 @@
     {
       "date": "2026-05-16",
       "home": "Maďarsko",
+      "homeFlag": "hu",
       "away": "Finsko",
+      "awayFlag": "fi",
       "resultHome": "-",
       "resultAway": "-",
 
@@ -131,7 +141,9 @@
     {
       "date": "2026-05-16",
       "home": "Slovinsko",
+      "homeFlag": "si",
       "away": "Česko",
+      "awayFlag": "cz",
       "resultHome": "-",
       "resultAway": "-",
 
@@ -146,7 +158,9 @@
     {
       "date": "2026-05-16",
       "home": "Švýcarsko",
+      "homeFlag": "ch",
       "away": "Lotyšsko",
+      "awayFlag": "lv",
       "resultHome": "-",
       "resultAway": "-",
 
