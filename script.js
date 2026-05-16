@@ -654,3 +654,99 @@ function renderPointsChart(matches) {
     }
   });
 }
+function renderDailyAwards(matches) {
+  const playedMatches = matches
+    .filter(isMatchPlayed)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  if (playedMatches.length === 0) {
+    return;
+  }
+
+  const latestDate = playedMatches[playedMatches.length - 1].date;
+
+  const latestMatches = playedMatches.filter(match => {
+    return match.date === latestDate;
+  });
+
+  const dailyStats = {};
+
+  latestMatches.forEach(match => {
+    const realWinner = getWinner(match.resultHome, match.resultAway);
+
+    match.tips.forEach(tip => {
+      if (!dailyStats[tip.name]) {
+        dailyStats[tip.name] = {
+          points: 0,
+          exact: 0
+        };
+      }
+
+      const distance = getDistance(
+        tip.home,
+        tip.away,
+        match.resultHome,
+        match.resultAway
+      );
+
+      const isExact =
+        tip.home === match.resultHome &&
+        tip.away === match.resultAway;
+
+      const correctWinner =
+        getWinner(tip.home, tip.away) === realWinner;
+
+      tip.distance = distance;
+      tip.isExact = isExact;
+      tip.correctWinner = correctWinner;
+    });
+
+    const closestTips = getClosestTipsForMatch(match);
+
+    match.tips.forEach(tip => {
+      if (tip.isExact) {
+        dailyStats[tip.name].points += 3;
+        dailyStats[tip.name].exact += 1;
+      } else if (closestTips.includes(tip)) {
+        dailyStats[tip.name].points += 1;
+      }
+    });
+  });
+
+  const players = Object.entries(dailyStats);
+
+  const maxPoints = Math.max(...players.map(player => player[1].points));
+  const minPoints = Math.min(...players.map(player => player[1].points));
+  const maxExact = Math.max(...players.map(player => player[1].exact));
+
+  const bestPlayers = players
+    .filter(player => player[1].points === maxPoints)
+    .map(player => player[0]);
+
+  const worstPlayers = players
+    .filter(player => player[1].points === minPoints)
+    .map(player => player[0]);
+
+  const sharpshooters = players
+    .filter(player => player[1].exact === maxExact && maxExact > 0)
+    .map(player => player[0]);
+
+  document.getElementById("daily-best").textContent =
+    bestPlayers.join(" / ");
+
+  document.getElementById("daily-worst").textContent =
+    worstPlayers.join(" / ");
+
+  document.getElementById("daily-sharpshooter").textContent =
+    sharpshooters.length > 0 ? sharpshooters.join(" / ") : "Nikdo";
+}
+
+function setupFlipCards() {
+  const cards = document.querySelectorAll(".flip-card");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("is-flipped");
+    });
+  });
+}
