@@ -149,8 +149,20 @@ function renderGroupTable(matches, playerName, groupName, tableId) {
 
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${name}</td>
-      <td>${stats.played}</td>
+          <td>
+      <div class="table-team">
+    
+        <img
+          src="./images/flags/${flags[name]}.webp"
+          class="table-flag"
+          alt="${name}"
+        >
+    
+        <span>${name}</span>
+    
+      </div>
+    </td>
+          <td>${stats.played}</td>
       <td>${stats.wins}</td>
       <td>${stats.losses}</td>
       <td>${stats.gf}:${stats.ga}</td>
