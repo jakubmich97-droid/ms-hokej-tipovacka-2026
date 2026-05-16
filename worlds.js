@@ -121,6 +121,13 @@ function renderGroupTable(matches, playerName, groupName, tableId) {
     const stats = team[1];
 
     const row = document.createElement("tr");
+        if (index < 4) {
+      row.classList.add("qualified-row");
+    }
+    
+    if (index >= 7) {
+      row.classList.add("relegated-row");
+    }
 
     row.innerHTML = `
       <td>${index + 1}</td>
