@@ -5,7 +5,9 @@
     {
       "date": "2026-05-15",
       "home": "Finsko",
+      "homeFlag": "fi",
       "away": "Německo",
+      "awayFlag": "de",
       "resultHome": 3,
       "resultAway": 1,
 
@@ -20,7 +22,9 @@
     {
       "date": "2026-05-15",
       "home": "Kanada",
+      "awayFlag": "ca",
       "away": "Švédsko",
+      "awayFlag": "se",
       "resultHome": 5,
       "resultAway": 3,
 
