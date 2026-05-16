@@ -1,3 +1,21 @@
+const flags = {
+  "Česko": "cz",
+  "Kanada": "ca",
+  "Finsko": "fi",
+  "Švédsko": "se",
+  "Německo": "de",
+  "USA": "us",
+  "Švýcarsko": "ch",
+  "Dánsko": "dk",
+  "Slovensko": "sk",
+  "Lotyšsko": "lv",
+  "Rakousko": "at",
+  "Norsko": "no",
+  "Slovinsko": "si",
+  "Maďarsko": "hu",
+  "Velká Británie": "gb",
+  "Itálie": "it"
+};
 async function loadWorlds() {
   const response = await fetch("./data/matches.json");
   const data = await response.json();
