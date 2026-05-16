@@ -66,8 +66,8 @@
       "date": "2026-05-16",
       "home": "Slovensko",
       "away": "Norsko",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 5, "away": 3 },
@@ -81,8 +81,8 @@
       "date": "2026-05-16",
       "home": "Velká Británie",
       "away": "Rakousko",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 2, "away": 4 },
@@ -111,8 +111,8 @@
       "date": "2026-05-16",
       "home": "Maďarsko",
       "away": "Finsko",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 0, "away": 4 },
@@ -126,8 +126,8 @@
       "date": "2026-05-16",
       "home": "Slovinsko",
       "away": "Česko",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 1, "away": 3 },
@@ -141,8 +141,8 @@
       "date": "2026-05-16",
       "home": "Švýcarsko",
       "away": "Lotyšsko",
-      "resultHome": 0,
-      "resultAway": 0,
+      "resultHome": "-",
+      "resultAway": "-",
 
       "tips": [
         { "name": "Kuba", "home": 6, "away": 2 },
