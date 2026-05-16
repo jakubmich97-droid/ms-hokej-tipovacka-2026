@@ -1,5 +1,6 @@
 [
   {
+    "date": "15.5.2026",
     "home": "Finsko",
     "away": "Německo",
     "resultHome": 3,
@@ -12,6 +13,7 @@
     ]
   },
   {
+    "date": "15.5.2026",
     "home": "Kanada",
     "away": "Švédsko",
     "resultHome": 5,
@@ -24,6 +26,7 @@
     ]
   },
   {
+    "date": "15.5.2026",
     "home": "Česko",
     "away": "Dánsko",
     "resultHome": 4,
@@ -36,6 +39,7 @@
     ]
   },
     {
+    "date": "15.5.2026",
     "home": "USA",
     "away": "Švýcarsko",
     "resultHome": 1,
