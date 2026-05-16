@@ -370,16 +370,35 @@ function renderPointsChart(matches) {
     });
   });
 
-  const datasets = players.map(player => {
-    return {
-      label: player,
-      data: history[player],
-      tension: 0.35,
-      borderWidth: 3,
-      pointRadius: 4,
-      pointHoverRadius: 7
-    };
-  });
+const playerColors = {
+  Kuba: "#ff0000",
+  Dejv: "#008000",
+  Jiřoch: "#1e90ff",
+  Luba: "#7b68ee"
+};
+
+const datasets = players.map(player => {
+  const color =
+    playerColors[player] || "#ffffff";
+
+  return {
+    label: player,
+    data: history[player],
+
+    borderColor: color,
+    backgroundColor: color,
+
+    tension: 0.35,
+    borderWidth: 4,
+
+    pointRadius: 5,
+    pointHoverRadius: 8,
+
+    pointBackgroundColor: color,
+    pointBorderColor: "#020617",
+    pointBorderWidth: 2
+  };
+});
 
   new Chart(canvas, {
     type: "line",
