@@ -351,17 +351,35 @@ function renderPlayoff(
 
     card.className = "playoff-card";
 
-    card.innerHTML = `
-      <div class="playoff-title">
-        ${match[0]} vs ${match[2]}
-      </div>
+card.innerHTML = `
+  <div class="playoff-title">
+    ${match[0]} vs ${match[2]}
+  </div>
 
-      <div class="playoff-match">
-        ${match[1]}
-        vs
-        ${match[3]}
-      </div>
-    `;
+  <div class="playoff-teams">
+    <div class="playoff-team">
+      <img
+        src="./images/flags/${flags[match[1]]}.webp"
+        class="playoff-flag"
+        alt="${match[1]}"
+      >
+      <span>${match[1]}</span>
+    </div>
+
+    <div class="playoff-vs">
+      vs
+    </div>
+
+    <div class="playoff-team">
+      <img
+        src="./images/flags/${flags[match[3]]}.webp"
+        class="playoff-flag"
+        alt="${match[3]}"
+      >
+      <span>${match[3]}</span>
+    </div>
+  </div>
+`;
 
     container.appendChild(card);
 
