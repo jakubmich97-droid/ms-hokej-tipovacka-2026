@@ -78,9 +78,15 @@ main {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 2fr 1fr;
   gap: 16px;
   margin: 24px 0 24px;
+}
+
+.stats-combined {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
 .stat-card,
@@ -596,17 +602,24 @@ footer {
 }
 
 @media (max-width: 800px) {
-  .stats-grid,
-  .stats-summary {
-    grid-template-columns: repeat(2, 1fr);
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-combined {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .daily-awards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .playoff-grid {
     grid-template-columns: 1fr;
+  }
+
+  .flip-card {
+    height: 220px;
   }
 }
 
@@ -647,9 +660,20 @@ footer {
     width: min(100% - 20px, 1120px);
   }
 
-  .stats-grid,
-  .stats-summary {
+  .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-combined {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-combined .stat-label {
+    font-size: 12px;
+  }
+
+  .stats-combined strong {
+    font-size: 24px;
   }
 
   .card,
@@ -668,7 +692,25 @@ footer {
     height: 300px;
   }
 
+  .daily-awards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
   .flip-card {
     height: 170px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    border-radius: 14px;
+  }
+
+  .flip-card-back span {
+    font-size: 12px;
+  }
+
+  .flip-card-back strong {
+    font-size: 16px;
   }
 }
