@@ -4,6 +4,7 @@
   "matches": [
     {
       "date": "2026-05-15",
+      "group": "A",
       "home": "Finsko",
       "homeFlag": "fi",
       "away": "Německo",
@@ -21,6 +22,7 @@
 
     {
       "date": "2026-05-15",
+      "group": "B",
       "home": "Kanada",
       "homeFlag": "ca",
       "away": "Švédsko",
@@ -38,6 +40,7 @@
 
     {
       "date": "2026-05-15",
+      "group": "B",
       "home": "Česko",
       "homeFlag": "cz",
       "away": "Dánsko",
@@ -55,6 +58,7 @@
 
     {
       "date": "2026-05-15",
+      "group": "A",
       "home": "USA",
       "homeFlag": "us",
       "away": "Švýcarsko",
@@ -72,6 +76,7 @@
     
     {
       "date": "2026-05-16",
+      "group": "B",
       "home": "Slovensko",
       "homeFlag": "sk",
       "away": "Norsko",
@@ -89,6 +94,7 @@
   
     {
       "date": "2026-05-16",
+      "group": "A",
       "home": "Velká Británie",
       "homeFlag": "gb",
       "away": "Rakousko",
@@ -106,6 +112,7 @@
     
     {
       "date": "2026-05-16",
+      "group": "B",
       "home": "Itálie",
       "homeFlag": "it",
       "away": "Kanada",
@@ -123,6 +130,7 @@
 
     {
       "date": "2026-05-16",
+      "group": "A",
       "home": "Maďarsko",
       "homeFlag": "hu",
       "away": "Finsko",
@@ -140,6 +148,7 @@
 
     {
       "date": "2026-05-16",
+      "group": "B",
       "home": "Slovinsko",
       "homeFlag": "si",
       "away": "Česko",
@@ -157,6 +166,7 @@
 
     {
       "date": "2026-05-16",
+      "group": "A",
       "home": "Švýcarsko",
       "homeFlag": "ch",
       "away": "Lotyšsko",
@@ -174,6 +184,7 @@
 
     {
       "date": "2026-05-17",
+      "group": "B",
       "home": "Itálie",
       "homeFlag": "it",
       "away": "Slovensko",
@@ -191,6 +202,7 @@
 
     {
       "date": "2026-05-17",
+      "group": "A",
       "home": "Velká Británie",
       "homeFlag": "gb",
       "away": "USA",
@@ -207,6 +219,7 @@
     },
     {
       "date": "2026-05-17",
+      "group": "B",
       "home": "Dánsko",
       "homeFlag": "dk",
       "away": "Švédsko",
@@ -223,6 +236,7 @@
     },
     {
       "date": "2026-05-17",
+      "group": "A",
       "home": "Rakousko",
       "homeFlag": "at",
       "away": "Maďarsko",
@@ -239,6 +253,7 @@
     },
     {
       "date": "2026-05-17",
+      "group": "A",
       "home": "Německo",
       "homeFlag": "de",
       "away": "Lotyšsko",
@@ -255,6 +270,7 @@
     },
     {
       "date": "2026-05-17",
+      "group": "B",
       "home": "Norsko",
       "homeFlag": "no",
       "away": "Slovinsko",
