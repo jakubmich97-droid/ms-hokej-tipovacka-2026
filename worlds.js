@@ -16,6 +16,7 @@ const flags = {
   "Velká Británie": "gb",
   "Itálie": "it"
 };
+
 async function loadWorlds() {
   const response = await fetch("./data/matches.json");
   const data = await response.json();
@@ -30,52 +31,92 @@ function isMatchPlayed(match) {
 }
 
 function startWorlds(matches) {
+
   const select = document.getElementById("player-select");
   const players = [];
 
   matches.forEach(match => {
+
     match.tips.forEach(tip => {
+
       if (!players.includes(tip.name)) {
         players.push(tip.name);
       }
+
     });
+
   });
 
   players.sort();
 
   players.forEach(player => {
+
     const option = document.createElement("option");
+
     option.value = player;
     option.textContent = player;
+
     select.appendChild(option);
+
   });
 
-  renderAllGroups(matches, players[0]);
+  renderAll(matches, players[0]);
 
   select.addEventListener("change", event => {
-    renderAllGroups(matches, event.target.value);
+
+    renderAll(matches, event.target.value);
+
   });
 }
 
-function renderAllGroups(matches, playerName) {
-  renderGroupTable(matches, playerName, "A", "group-a-table");
-  renderGroupTable(matches, playerName, "B", "group-b-table");
+function renderAll(matches, playerName) {
+
+  const realA =
+    calculateTable(matches, null, "A");
+
+  const realB =
+    calculateTable(matches, null, "B");
+
+  const predictedA =
+    calculateTable(matches, playerName, "A");
+
+  const predictedB =
+    calculateTable(matches, playerName, "B");
+
+  renderGroupTable(
+    predictedA,
+    realA,
+    "group-a-table"
+  );
+
+  renderGroupTable(
+    predictedB,
+    realB,
+    "group-b-table"
+  );
+
+  renderPlayoff(
+    predictedA,
+    predictedB
+  );
 }
 
-function renderGroupTable(matches, playerName, groupName, tableId) {
-  const tbody = document.querySelector(`#${tableId} tbody`);
-  tbody.innerHTML = "";
+function calculateTable(
+  matches,
+  playerName,
+  groupName
+) {
 
   const table = {};
 
-  const groupMatches = matches.filter(match => {
-    return match.group === groupName && isMatchPlayed(match);
+  const filteredMatches = matches.filter(match => {
+    return (
+      match.group === groupName &&
+      isMatchPlayed(match)
+    );
   });
 
-  groupMatches.forEach(match => {
-    const playerTip = match.tips.find(tip => tip.name === playerName);
-
-    if (!playerTip) return;
+  filteredMatches.forEach(match => {
 
     const homeTeam = match.home;
     const awayTeam = match.away;
@@ -88,8 +129,26 @@ function renderGroupTable(matches, playerName, groupName, tableId) {
       table[awayTeam] = createTeamStats();
     }
 
-    const homeGoals = playerTip.home;
-    const awayGoals = playerTip.away;
+    let homeGoals;
+    let awayGoals;
+
+    if (playerName) {
+
+      const playerTip = match.tips.find(
+        tip => tip.name === playerName
+      );
+
+      if (!playerTip) return;
+
+      homeGoals = playerTip.home;
+      awayGoals = playerTip.away;
+
+    } else {
+
+      homeGoals = match.resultHome;
+      awayGoals = match.resultAway;
+
+    }
 
     table[homeTeam].played += 1;
     table[awayTeam].played += 1;
@@ -101,91 +160,219 @@ function renderGroupTable(matches, playerName, groupName, tableId) {
     table[awayTeam].ga += homeGoals;
 
     if (homeGoals > awayGoals) {
+
       table[homeTeam].points += 3;
       table[homeTeam].wins += 1;
+
       table[awayTeam].losses += 1;
+
     } else if (awayGoals > homeGoals) {
+
       table[awayTeam].points += 3;
       table[awayTeam].wins += 1;
+
       table[homeTeam].losses += 1;
+
     } else {
+
       table[homeTeam].points += 1;
       table[awayTeam].points += 1;
-      table[homeTeam].draws += 1;
-      table[awayTeam].draws += 1;
+
     }
+
   });
 
-  const sortedTeams = Object.entries(table).sort((a, b) => {
-    const statsA = a[1];
-    const statsB = b[1];
+  return Object.entries(table)
+    .sort((a, b) => {
 
-    if (statsB.points !== statsA.points) {
-      return statsB.points - statsA.points;
-    }
+      const statsA = a[1];
+      const statsB = b[1];
 
-    const diffA = statsA.gf - statsA.ga;
-    const diffB = statsB.gf - statsB.ga;
+      if (statsB.points !== statsA.points) {
+        return statsB.points - statsA.points;
+      }
 
-    if (diffB !== diffA) {
-      return diffB - diffA;
-    }
+      const diffA =
+        statsA.gf - statsA.ga;
 
-    return statsB.gf - statsA.gf;
-  });
+      const diffB =
+        statsB.gf - statsB.ga;
 
-  sortedTeams.forEach((team, index) => {
+      if (diffB !== diffA) {
+        return diffB - diffA;
+      }
+
+      return statsB.gf - statsA.gf;
+    });
+}
+
+function renderGroupTable(
+  predicted,
+  real,
+  tableId
+) {
+
+  const tbody = document.querySelector(
+    `#${tableId} tbody`
+  );
+
+  tbody.innerHTML = "";
+
+  predicted.forEach((team, index) => {
+
     const name = team[0];
     const stats = team[1];
 
-    const row = document.createElement("tr");
-        if (index < 4) {
+    const realPosition =
+      real.findIndex(
+        realTeam => realTeam[0] === name
+      );
+
+    const diff =
+      realPosition - index;
+
+    let diffHtml = "";
+
+    if (diff > 0) {
+
+      diffHtml = `
+        <span class="diff-up">
+          (+${diff})
+        </span>
+      `;
+
+    } else if (diff < 0) {
+
+      diffHtml = `
+        <span class="diff-down">
+          (${diff})
+        </span>
+      `;
+
+    } else {
+
+      diffHtml = `
+        <span class="diff-same">
+          (=)
+        </span>
+      `;
+    }
+
+    const row =
+      document.createElement("tr");
+
+    if (index < 4) {
       row.classList.add("qualified-row");
     }
-    
+
     if (index >= 7) {
       row.classList.add("relegated-row");
     }
 
     row.innerHTML = `
       <td>${index + 1}</td>
-          <td>
-      <div class="table-team">
-    
-        <img
-          src="./images/flags/${flags[name]}.webp"
-          class="table-flag"
-          alt="${name}"
-        >
-    
-        <span>${name}</span>
-    
-      </div>
-    </td>
-          <td>${stats.played}</td>
+
+      <td>
+
+        <div class="table-team">
+
+          <img
+            src="./images/flags/${flags[name]}.webp"
+            class="table-flag"
+            alt="${name}"
+          >
+
+          <span>
+            ${name}
+          </span>
+
+          ${diffHtml}
+
+        </div>
+
+      </td>
+
+      <td>${stats.played}</td>
+
       <td>${stats.wins}</td>
+
       <td>${stats.losses}</td>
-      <td>${stats.gf}:${stats.ga}</td>
+
+      <td>
+        ${stats.gf}:${stats.ga}
+      </td>
+
       <td>${stats.points}</td>
     `;
 
     tbody.appendChild(row);
-  });
 
-  if (sortedTeams.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7">Zatím nejsou odehrané zápasy v této skupině.</td>
-      </tr>
+  });
+}
+
+function renderPlayoff(
+  groupA,
+  groupB
+) {
+
+  const container =
+    document.getElementById(
+      "playoff-bracket"
+    );
+
+  container.innerHTML = "";
+
+  if (
+    groupA.length < 4 ||
+    groupB.length < 4
+  ) {
+    container.innerHTML = `
+      <div class="card rules">
+        Play-off bude dostupné,
+        až budou mít obě skupiny
+        alespoň 4 týmy.
+      </div>
     `;
+
+    return;
   }
+
+  const matches = [
+    ["A1", groupA[0][0], "B4", groupB[3][0]],
+    ["A2", groupA[1][0], "B3", groupB[2][0]],
+    ["B1", groupB[0][0], "A4", groupA[3][0]],
+    ["B2", groupB[1][0], "A3", groupA[2][0]]
+  ];
+
+  matches.forEach(match => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "playoff-card";
+
+    card.innerHTML = `
+      <div class="playoff-title">
+        ${match[0]} vs ${match[2]}
+      </div>
+
+      <div class="playoff-match">
+        ${match[1]}
+        vs
+        ${match[3]}
+      </div>
+    `;
+
+    container.appendChild(card);
+
+  });
 }
 
 function createTeamStats() {
+
   return {
     played: 0,
     wins: 0,
-    draws: 0,
     losses: 0,
     gf: 0,
     ga: 0,
