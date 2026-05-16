@@ -487,3 +487,25 @@ footer {
   font-size: 16px;
   font-weight: 700;
 }
+.qualified-row td:first-child {
+  border-left: 4px solid #0ea5e9;
+}
+
+.relegated-row td:first-child {
+  border-left: 4px solid #ef4444;
+}
+
+.qualified-row {
+  background: rgba(14, 165, 233, 0.07);
+}
+
+.relegated-row {
+  background: rgba(239, 68, 68, 0.08);
+}
+.qualified-row td:first-child::before {
+  content: "";
+}
+
+.relegated-row td:first-child::before {
+  content: "";
+}
