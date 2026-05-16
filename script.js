@@ -73,6 +73,8 @@ function startApp(matches, lastUpdate) {
   renderLeaderboard(sortedPlayers);
   renderMatches(matches);
   renderStats(matches, sortedPlayers, totalExact);
+  renderDailyAwards(matches);
+  setupFlipCards();
   renderLastUpdate(lastUpdate);
   renderPointsChart(matches);
 }
