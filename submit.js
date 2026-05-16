@@ -21,13 +21,17 @@ async function loadMatches() {
   const select =
     document.getElementById("match-select");
 
-  const upcomingMatches =
-    data.matches.filter(match => {
-      return (
-        match.resultHome === "-" &&
-        match.resultAway === "-"
-      );
-    });
+const upcomingMatches =
+  data.matches.filter(match => {
+
+    return (
+      match.resultHome === "-" ||
+      match.resultHome === null ||
+      match.resultHome === "" ||
+      match.resultHome === undefined
+    );
+
+  });
 
   upcomingMatches.forEach(match => {
 
