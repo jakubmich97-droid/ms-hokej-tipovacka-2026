@@ -110,6 +110,18 @@ function getPositionText(players, index) {
   return `${firstIndex + 1}/${lastIndex + 1}`;
 }
 
+function formatDate(dateString) {
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("cs-CZ", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
+
 function renderLeaderboard(players) {
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = "";
@@ -168,8 +180,14 @@ function renderMatches(matches) {
 
     card.innerHTML = `
       <div class="match-header">
-        <div class="match-title">
-          ${match.home} vs ${match.away}
+        <div>
+          <div class="match-date">
+            ${formatDate(match.date)}
+          </div>
+
+          <div class="match-title">
+            ${match.home} vs ${match.away}
+          </div>
         </div>
 
         <div class="match-result">
