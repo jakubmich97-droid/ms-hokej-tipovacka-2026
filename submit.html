@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Odeslat tip</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <main class="submit-page">
+
+    <div class="card submit-card">
+
+      <h1>🏒 Odeslat tip</h1>
+
+      <p class="submit-subtitle">
+        Vyplň svůj tip na zápas MS 2026.
+      </p>
+
+      <form id="tip-form">
+
+        <label>
+          Jméno
+        </label>
+
+        <input
+          type="text"
+          id="player-name"
+          required
+          placeholder="Např. Kuba"
+        >
+
+        <label>
+          Zápas
+        </label>
+
+        <select id="match-select" required>
+        </select>
+
+        <div class="score-inputs">
+
+          <div>
+            <label>Domácí</label>
+
+            <input
+              type="number"
+              id="tip-home"
+              required
+              min="0"
+              max="20"
+            >
+          </div>
+
+          <div>
+            <label>Hosté</label>
+
+            <input
+              type="number"
+              id="tip-away"
+              required
+              min="0"
+              max="20"
+            >
+          </div>
+
+        </div>
+
+        <button type="submit">
+          📩 Odeslat tip
+        </button>
+
+      </form>
+
+      <div id="submit-status"></div>
+
+    </div>
+
+  </main>
+
+  <script src="submit.js"></script>
+
+</body>
+</html>
