@@ -509,3 +509,16 @@ footer {
 .relegated-row td:first-child::before {
   content: "";
 }
+.table-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-flag {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.18);
+}
