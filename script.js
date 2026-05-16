@@ -167,70 +167,89 @@ function renderLeaderboard(players) {
 }
 
 function renderMatches(matches) {
-  const container = document.getElementById("matches");
-  container.innerHTML = "";
+  const playedContainer = document.getElementById("played-matches");
+  const upcomingContainer = document.getElementById("upcoming-matches");
 
-  matches.forEach(match => {
-    const played = isMatchPlayed(match);
-    const closestTips = played ? getClosestTipsForMatch(match) : [];
-    const resultText = played ? `${match.resultHome}:${match.resultAway}` : "vs";
+  playedContainer.innerHTML = "";
+  upcomingContainer.innerHTML = "";
 
-    const tipsHtml = match.tips.map(tip => {
-      let badge = `<span class="badge badge-zero">${played ? "0 bodů" : "nehráno"}</span>`;
+  const playedMatches = matches.filter(isMatchPlayed);
+  const upcomingMatches = matches.filter(match => !isMatchPlayed(match));
 
-      if (played && tip.isExact) {
-        badge = `<span class="badge badge-exact">+3 body</span>`;
-      } else if (played && closestTips.includes(tip)) {
-        badge = `<span class="badge badge-close">+1 bod</span>`;
-      }
+  playedMatches.forEach(match => {
+    playedContainer.appendChild(createMatchCard(match, true));
+  });
 
-      return `
-        <tr>
-          <td>${tip.name}</td>
-          <td>${tip.home}:${tip.away}</td>
-          <td>${badge}</td>
-        </tr>
-      `;
-    }).join("");
+  upcomingMatches.forEach(match => {
+    upcomingContainer.appendChild(createMatchCard(match, false));
+  });
 
-    const card = document.createElement("div");
-    card.className = "match-card";
+  if (playedMatches.length === 0) {
+    playedContainer.innerHTML = `<div class="card rules">Zatím nejsou žádné odehrané zápasy.</div>`;
+  }
 
-    card.innerHTML = `
-      <div class="match-header">
-        <div>
-          <div class="match-date">
-            ${formatDate(match.date)}
-          </div>
+  if (upcomingMatches.length === 0) {
+    upcomingContainer.innerHTML = `<div class="card rules">Žádné nadcházející zápasy.</div>`;
+  }
+}
+function createMatchCard(match, played) {
+  const closestTips = played ? getClosestTipsForMatch(match) : [];
+  const resultText = played ? `${match.resultHome}:${match.resultAway}` : "čeká se";
 
-          <div class="match-title">
-            ${match.home} vs ${match.away}
-          </div>
+  const tipsHtml = match.tips.map(tip => {
+    let badge = `<span class="badge badge-zero">${played ? "0 bodů" : "nehráno"}</span>`;
+
+    if (played && tip.isExact) {
+      badge = `<span class="badge badge-exact">+3 body</span>`;
+    } else if (played && closestTips.includes(tip)) {
+      badge = `<span class="badge badge-close">+1 bod</span>`;
+    }
+
+    return `
+      <tr>
+        <td>${tip.name}</td>
+        <td>${tip.home}:${tip.away}</td>
+        <td>${badge}</td>
+      </tr>
+    `;
+  }).join("");
+
+  const card = document.createElement("div");
+  card.className = played ? "match-card" : "match-card match-card-upcoming";
+
+  card.innerHTML = `
+    <div class="match-header">
+      <div>
+        <div class="match-date">
+          ${formatDate(match.date)}
         </div>
 
-        <div class="match-result">
-          ${resultText}
+        <div class="match-title">
+          ${match.home} vs ${match.away}
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Hráč</th>
-            <th>Tip</th>
-            <th>Body</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${tipsHtml}
-        </tbody>
-      </table>
-    `;
+      <div class="match-result">
+        ${resultText}
+      </div>
+    </div>
 
-    container.appendChild(card);
-  });
+    <table>
+      <thead>
+        <tr>
+          <th>Hráč</th>
+          <th>Tip</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tipsHtml}
+      </tbody>
+    </table>
+  `;
+
+  return card;
 }
-
 function renderStats(matches, players, totalExact) {
   const playedMatches = matches.filter(isMatchPlayed);
 
@@ -238,8 +257,17 @@ function renderStats(matches, players, totalExact) {
   document.getElementById("matches-count").textContent = playedMatches.length;
   document.getElementById("exact-count").textContent = totalExact;
 
-  document.getElementById("current-leader").textContent =
-    players.length > 0 ? players[0][0] : "-";
+  const leaderElement = document.getElementById("current-leader");
+
+  if (players.length > 0) {
+    leaderElement.innerHTML = `
+      <span class="leader-badge">
+        👑 ${players[0][0]}
+      </span>
+    `;
+  } else {
+    leaderElement.textContent = "-";
+  }
 }
 
 function renderLastUpdate(lastUpdate) {
