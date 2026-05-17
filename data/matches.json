@@ -189,8 +189,8 @@
       "homeFlag": "it",
       "away": "Slovensko",
       "awayFlag": "sk",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 1,
+      "resultAway": 4,
 
       "tips": [
         { "name": "Kuba", "home": 1, "away": 5 },
