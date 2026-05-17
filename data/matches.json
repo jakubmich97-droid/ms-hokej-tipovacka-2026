@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-17 18:45",
+  "lastUpdate": "2026-05-17 18:51",
 
   "matches": [
     {
@@ -224,8 +224,8 @@
       "homeFlag": "dk",
       "away": "Švédsko",
       "awayFlag": "se",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 2,
+      "resultAway": 6,
 
       "tips": [
         { "name": "Kuba", "home": 2, "away": 6 },
