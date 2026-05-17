@@ -90,29 +90,40 @@ function getWinner(home, away) {
 }
 
 function getClosestTipsForMatch(match) {
+
   if (!isMatchPlayed(match)) {
     return [];
   }
 
-  const exactExists = match.tips.some(tip => tip.isExact);
+  const exactExists =
+    match.tips.some(tip => tip.isExact);
 
   if (exactExists) {
     return [];
   }
 
-  const nonExactTips = match.tips.filter(tip => !tip.isExact);
-  const correctWinnerTips = nonExactTips.filter(tip => tip.correctWinner);
+  const nonExactTips =
+    match.tips.filter(tip => !tip.isExact);
 
-  const tipsForClosest =
-    correctWinnerTips.length > 0 ? correctWinnerTips : nonExactTips;
+  const correctWinnerTips =
+    nonExactTips.filter(tip => tip.correctWinner);
 
-  if (tipsForClosest.length === 0) {
+  // NOVĚ:
+  // pokud nikdo netrefil vítěze,
+  // nikdo nedostane bod
+
+  if (correctWinnerTips.length === 0) {
     return [];
   }
 
-  const bestDistance = Math.min(...tipsForClosest.map(tip => tip.distance));
+  const bestDistance = Math.min(
+    ...correctWinnerTips.map(tip => tip.distance)
+  );
 
-  return tipsForClosest.filter(tip => tip.distance === bestDistance);
+  return correctWinnerTips.filter(tip => {
+    return tip.distance === bestDistance;
+  });
+
 }
 
 function getPositionText(players, index) {
