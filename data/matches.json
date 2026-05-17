@@ -207,8 +207,8 @@
       "homeFlag": "gb",
       "away": "USA",
       "awayFlag": "us",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 1,
+      "resultAway": 5,
 
       "tips": [
         { "name": "Kuba", "home": 1, "away": 5 },
