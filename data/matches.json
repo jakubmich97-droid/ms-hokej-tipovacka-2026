@@ -296,10 +296,10 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
-        { "name": "Jiřoch", "home": "-", "away": "-" },
-        { "name": "Luba", "home": "-", "away": "-" }
+        { "name": "Kuba", "home": 3, "away": 4 },
+        { "name": "Dejv", "home": 2, "away": 3 },
+        { "name": "Jiřoch", "home": 4, "away": 3 },
+        { "name": "Luba", "home": 3, "away": 2 }
       ]
     },
     {
@@ -312,10 +312,10 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
-        { "name": "Jiřoch", "home": "-", "away": "-" },
-        { "name": "Luba", "home": "-", "away": "-" }
+        { "name": "Kuba", "home": 6, "away": 1 },
+        { "name": "Dejv", "home": 5, "away": 1 },
+        { "name": "Jiřoch", "home": 4, "away": 1 },
+        { "name": "Luba", "home": 5, "away": 0 }
       ]
     },
     {
@@ -328,10 +328,10 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
-        { "name": "Jiřoch", "home": "-", "away": "-" },
-        { "name": "Luba", "home": "-", "away": "-" }
+        { "name": "Kuba", "home": 1, "away": 5 },
+        { "name": "Dejv", "home": 1, "away": 3 },
+        { "name": "Jiřoch", "home": 2, "away": 4 },
+        { "name": "Luba", "home": 1, "away": 4 }
       ]
     },
     {
@@ -344,10 +344,10 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
-        { "name": "Jiřoch", "home": "-", "away": "-" },
-        { "name": "Luba", "home": "-", "away": "-" }
+        { "name": "Kuba", "home": 3, "away": 4 },
+        { "name": "Dejv", "home": 4, "away": 2 },
+        { "name": "Jiřoch", "home": 3, "away": 1 },
+        { "name": "Luba", "home": 4, "away": 1 }
       ]
     },
 
