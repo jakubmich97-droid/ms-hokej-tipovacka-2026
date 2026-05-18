@@ -46,15 +46,20 @@ function startApp(matches, lastUpdate) {
           points: 0,
           exact: 0,
           totalTipGoals: 0,
-          tipsCount: 0
+          tipsCount: 0,
+          correctWinners: 0
         };
       }
 
       leaderboard[tip.name].totalTipGoals +=
         tip.home + tip.away;
-
+      
       leaderboard[tip.name].tipsCount += 1;
-
+      
+      if (tip.correctWinner) {
+        leaderboard[tip.name].correctWinners += 1;
+      }
+      
       if (tip.isExact) {
         leaderboard[tip.name].points += 3;
         leaderboard[tip.name].exact += 1;
@@ -163,6 +168,9 @@ function renderLeaderboard(players) {
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = "";
 
+  const totalPlayedMatches =
+    document.querySelectorAll(".match-card").length;
+
   players.forEach((player, index) => {
     const name = player[0];
     const data = player[1];
@@ -181,6 +189,13 @@ function renderLeaderboard(players) {
       data.totalTipGoals /
       data.tipsCount
     ).toFixed(1);
+
+    const winnerAccuracy =
+      data.correctWinners && data.tipsCount > 0
+        ? Math.round(
+            (data.correctWinners / data.tipsCount) * 100
+          )
+        : 0;
 
     row.innerHTML = `
       <td class="${rankClass}">
@@ -201,6 +216,10 @@ function renderLeaderboard(players) {
 
       <td>
         ${avgGoals}
+      </td>
+
+      <td>
+        ${winnerAccuracy}%
       </td>
     `;
 
