@@ -88,6 +88,9 @@ function getDistance(tipHome, tipAway, resultHome, resultAway) {
 }
 
 function getWinner(home, away) {
+  home = Number(home);
+  away = Number(away);
+
   if (home > away) return "home";
   if (away > home) return "away";
 
