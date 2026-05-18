@@ -341,8 +341,8 @@
       "homeFlag": "se",
       "away": "Česko",
       "awayFlag": "cz",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 3,
+      "resultAway": 4,
       "tips": [
         { "name": "Kuba", "home": 3, "away": 4 },
         { "name": "Dejv", "home": 4, "away": 2 },
