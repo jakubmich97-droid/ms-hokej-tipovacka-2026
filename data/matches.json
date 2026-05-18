@@ -293,8 +293,8 @@
       "homeFlag": "fi",
       "away": "USA",
       "awayFlag": "us",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 6,
+      "resultAway": 2,
       "tips": [
         { "name": "Kuba", "home": 3, "away": 4 },
         { "name": "Dejv", "home": 2, "away": 3 },
