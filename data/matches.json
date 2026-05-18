@@ -657,28 +657,12 @@
       ]
     },
     {
-      "date": "2026-05-24",
+      "date": "2026-05-23",
       "group": "B",
       "home": "Slovensko",
       "homeFlag": "sk",
       "away": "Česko",
       "awayFlag": "cz",
-      "resultHome": "-",
-      "resultAway": "-",
-      "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
-        { "name": "Jiřoch", "home": "-", "away": "-" },
-        { "name": "Luba", "home": "-", "away": "-" }
-      ]
-    },
-    {
-      "date": "2026-05-23",
-      "group": "A",
-      "home": "Švýcarsko",
-      "homeFlag": "ch",
-      "away": "Maďarsko",
-      "awayFlag": "hu",
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
