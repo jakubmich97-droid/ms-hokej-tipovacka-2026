@@ -309,8 +309,8 @@
       "homeFlag": "ca",
       "away": "Dánsko",
       "awayFlag": "dk",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 5,
+      "resultAway": 1,
       "tips": [
         { "name": "Kuba", "home": 6, "away": 1 },
         { "name": "Dejv", "home": 5, "away": 1 },
