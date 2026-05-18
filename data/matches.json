@@ -417,6 +417,199 @@
     },
 
     {
+      "date": "2026-05-20",
+      "group": "B",
+      "home": "Česko",
+      "homeFlag": "cz",
+      "away": "Itálie",
+      "awayFlag": "it",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-20",
+      "group": "A",
+      "home": "Rakousko",
+      "homeFlag": "at",
+      "away": "Švýcarsko",
+      "awayFlag": "ch",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-20",
+      "group": "A",
+      "home": "Švédsko",
+      "homeFlag": "se",
+      "away": "Slovinsko",
+      "awayFlag": "si",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-20",
+      "group": "B",
+      "home": "USA",
+      "homeFlag": "us",
+      "away": "Německo",
+      "awayFlag": "de",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "group": "A",
+      "home": "Kanada",
+      "homeFlag": "ca",
+      "away": "Norsko",
+      "awayFlag": "no",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "group": "B",
+      "home": "Lotyšsko",
+      "homeFlag": "lv",
+      "away": "Finsko",
+      "awayFlag": "fi",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "group": "A",
+      "home": "Dánsko",
+      "homeFlag": "dk",
+      "away": "Slovensko",
+      "awayFlag": "sk",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-21",
+      "group": "B",
+      "home": "Švýcarsko",
+      "homeFlag": "ch",
+      "away": "Velká Británie",
+      "awayFlag": "gb",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-22",
+      "group": "A",
+      "home": "Kanada",
+      "homeFlag": "ca",
+      "away": "Slovinsko",
+      "awayFlag": "si",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-22",
+      "group": "B",
+      "home": "Německo",
+      "homeFlag": "de",
+      "away": "Maďarsko",
+      "awayFlag": "hu",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-22",
+      "group": "A",
+      "home": "Finsko",
+      "homeFlag": "fi",
+      "away": "Velká Británie",
+      "awayFlag": "gb",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+    {
+      "date": "2026-05-22",
+      "group": "B",
+      "home": "Švédsko",
+      "homeFlag": "se",
+      "away": "Itálie",
+      "awayFlag": "it",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    }
+
+    {
       "date": "2026-05-23",
       "group": "A",
       "home": "Švýcarsko",
