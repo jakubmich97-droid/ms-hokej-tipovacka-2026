@@ -88,6 +88,7 @@ let earnedPoints = 0;
   });
 
   renderLeaderboard(sortedPlayers);
+  setupPlayerModal(sortedPlayers);
   renderMatches(matches);
   renderStats(matches, sortedPlayers, totalExact);
   // renderDailyAwards(matches);
@@ -225,7 +226,9 @@ function renderLeaderboard(players) {
       </td>
 
       <td>
-        ${name}
+        <button class="player-name-button" data-player="${name}">
+          ${name}
+        </button>
       </td>
 
       <td>
@@ -754,4 +757,81 @@ function setupFlipCards() {
       card.classList.toggle("is-flipped");
     });
   });
+}
+function setupPlayerModal(players) {
+  const modal = document.getElementById("player-modal");
+  const closeButton = document.getElementById("player-modal-close");
+
+  if (!modal || !closeButton) return;
+
+  document.querySelectorAll(".player-name-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const playerName = button.dataset.player;
+
+      const player = players.find(item => item[0] === playerName);
+
+      if (!player) return;
+
+      openPlayerModal(player);
+    });
+  });
+
+  closeButton.addEventListener("click", () => {
+    modal.classList.remove("is-open");
+  });
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) {
+      modal.classList.remove("is-open");
+    }
+  });
+}
+
+function openPlayerModal(player) {
+  const modal = document.getElementById("player-modal");
+  const nameElement = document.getElementById("player-modal-name");
+  const statsElement = document.getElementById("player-modal-stats");
+
+  const name = player[0];
+  const data = player[1];
+
+  const avgGoals = (data.totalTipGoals / data.tipsCount).toFixed(1);
+
+  const winnerAccuracy =
+    data.correctWinners && data.tipsCount > 0
+      ? Math.round((data.correctWinners / data.tipsCount) * 100)
+      : 0;
+
+  const form = data.form ? data.form.slice(-5).join(" ") : "-";
+
+  nameElement.textContent = name;
+
+  statsElement.innerHTML = `
+    <div class="player-stat-box">
+      <span>Body</span>
+      <strong>${data.points}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>Přesné trefy</span>
+      <strong>${data.exact}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>Úspěšnost vítěze</span>
+      <strong>${winnerAccuracy}%</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>Průměr gólů</span>
+      <strong>${avgGoals}</strong>
+    </div>
+
+    <div class="player-stat-box player-stat-wide">
+      <span>Forma posledních 5 zápasů</span>
+      <strong>${form}</strong>
+    </div>
+  `;
+
+  modal.classList.add("is-open");
 }
