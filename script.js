@@ -34,8 +34,8 @@ function startApp(matches, lastUpdate) {
         getWinner(tip.home, tip.away) === realWinner;
 
       tip.isExact =
-        tip.home === match.resultHome &&
-        tip.away === match.resultAway;
+        Number(tip.home) === Number(match.resultHome) &&
+        Number(tip.away) === Number(match.resultAway);
     });
 
     const closestTips = getClosestTipsForMatch(match);
@@ -48,20 +48,21 @@ function startApp(matches, lastUpdate) {
           totalTipGoals: 0,
           tipsCount: 0,
           correctWinners: 0,
-          form: []
+          form: [],
+          history: []
         };
       }
 
       leaderboard[tip.name].totalTipGoals +=
-        tip.home + tip.away;
-      
+        Number(tip.home) + Number(tip.away);
+
       leaderboard[tip.name].tipsCount += 1;
-      
+
       if (tip.correctWinner) {
         leaderboard[tip.name].correctWinners += 1;
       }
-      
-let earnedPoints = 0;
+
+      let earnedPoints = 0;
 
       if (tip.isExact) {
         earnedPoints = 3;
@@ -72,7 +73,7 @@ let earnedPoints = 0;
         earnedPoints = 1;
         leaderboard[tip.name].points += 1;
       }
-      
+
       if (earnedPoints > 0) {
         leaderboard[tip.name].form.push("🟢");
       } else if (tip.correctWinner) {
@@ -80,6 +81,20 @@ let earnedPoints = 0;
       } else {
         leaderboard[tip.name].form.push("⚫");
       }
+
+      leaderboard[tip.name].history.push({
+        date: match.date,
+        homeTeam: match.home,
+        awayTeam: match.away,
+        resultHome: match.resultHome,
+        resultAway: match.resultAway,
+        tipHome: tip.home,
+        tipAway: tip.away,
+        earnedPoints,
+        isExact: tip.isExact,
+        correctWinner: tip.correctWinner,
+        distance: tip.distance
+      });
     });
   });
 
@@ -91,14 +106,15 @@ let earnedPoints = 0;
   setupPlayerModal(sortedPlayers);
   renderMatches(matches);
   renderStats(matches, sortedPlayers, totalExact);
-  // renderDailyAwards(matches);
-  // setupFlipCards();
   renderLastUpdate(lastUpdate);
   renderPointsChart(matches);
 }
 
 function getDistance(tipHome, tipAway, resultHome, resultAway) {
-  return Math.abs(tipHome - resultHome) + Math.abs(tipAway - resultAway);
+  return (
+    Math.abs(Number(tipHome) - Number(resultHome)) +
+    Math.abs(Number(tipAway) - Number(resultAway))
+  );
 }
 
 function getWinner(home, away) {
@@ -112,7 +128,6 @@ function getWinner(home, away) {
 }
 
 function getClosestTipsForMatch(match) {
-
   if (!isMatchPlayed(match)) {
     return [];
   }
@@ -130,10 +145,6 @@ function getClosestTipsForMatch(match) {
   const correctWinnerTips =
     nonExactTips.filter(tip => tip.correctWinner);
 
-  // NOVĚ:
-  // pokud nikdo netrefil vítěze,
-  // nikdo nedostane bod
-
   if (correctWinnerTips.length === 0) {
     return [];
   }
@@ -145,7 +156,6 @@ function getClosestTipsForMatch(match) {
   return correctWinnerTips.filter(tip => {
     return tip.distance === bestDistance;
   });
-
 }
 
 function getPositionText(players, index) {
@@ -185,9 +195,6 @@ function renderLeaderboard(players) {
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = "";
 
-  const totalPlayedMatches =
-    document.querySelectorAll(".match-card").length;
-
   players.forEach((player, index) => {
     const name = player[0];
     const data = player[1];
@@ -213,13 +220,12 @@ function renderLeaderboard(players) {
             (data.correctWinners / data.tipsCount) * 100
           )
         : 0;
-    
+
     const form =
       data.form
         .slice(-5)
         .join(" ");
 
-    
     row.innerHTML = `
       <td class="${rankClass}">
         ${positionText}
@@ -246,10 +252,10 @@ function renderLeaderboard(players) {
       <td>
         ${winnerAccuracy}%
       </td>
+
       <td>
         ${form}
       </td>
-      
     `;
 
     tbody.appendChild(row);
@@ -397,17 +403,13 @@ function createMatchCard(match, played) {
 
   card.innerHTML = `
     <div class="match-header">
-
       <div>
-
         <div class="match-date">
           ${formatDate(match.date)}
         </div>
 
         <div class="match-scoreline">
-
           <div class="team-side">
-
             <img
               src="./images/flags/${match.homeFlag}.webp"
               class="flag"
@@ -417,7 +419,6 @@ function createMatchCard(match, played) {
             <span class="team-name">
               ${match.home}
             </span>
-
           </div>
 
           <div class="score-pill">
@@ -425,7 +426,6 @@ function createMatchCard(match, played) {
           </div>
 
           <div class="team-side">
-
             <img
               src="./images/flags/${match.awayFlag}.webp"
               class="flag"
@@ -435,17 +435,12 @@ function createMatchCard(match, played) {
             <span class="team-name">
               ${match.away}
             </span>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
 
     <table>
-
       <thead>
         <tr>
           <th>Hráč</th>
@@ -457,7 +452,6 @@ function createMatchCard(match, played) {
       <tbody>
         ${tipsHtml}
       </tbody>
-
     </table>
   `;
 
@@ -662,102 +656,6 @@ function renderPointsChart(matches) {
   });
 }
 
-function renderDailyAwards(matches) {
-  const playedMatches = matches
-    .filter(isMatchPlayed)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-  if (playedMatches.length === 0) {
-    return;
-  }
-
-  const latestDate = playedMatches[playedMatches.length - 1].date;
-
-  const latestMatches = playedMatches.filter(match => {
-    return match.date === latestDate;
-  });
-
-  const dailyStats = {};
-
-  latestMatches.forEach(match => {
-    const realWinner = getWinner(match.resultHome, match.resultAway);
-
-    match.tips.forEach(tip => {
-      if (!dailyStats[tip.name]) {
-        dailyStats[tip.name] = {
-          points: 0,
-          exact: 0
-        };
-      }
-
-      const distance = getDistance(
-        tip.home,
-        tip.away,
-        match.resultHome,
-        match.resultAway
-      );
-
-      const isExact =
-        tip.home === match.resultHome &&
-        tip.away === match.resultAway;
-
-      const correctWinner =
-        getWinner(tip.home, tip.away) === realWinner;
-
-      tip.distance = distance;
-      tip.isExact = isExact;
-      tip.correctWinner = correctWinner;
-    });
-
-    const closestTips = getClosestTipsForMatch(match);
-
-    match.tips.forEach(tip => {
-      if (tip.isExact) {
-        dailyStats[tip.name].points += 3;
-        dailyStats[tip.name].exact += 1;
-      } else if (closestTips.includes(tip)) {
-        dailyStats[tip.name].points += 1;
-      }
-    });
-  });
-
-  const players = Object.entries(dailyStats);
-
-  const maxPoints = Math.max(...players.map(player => player[1].points));
-  const minPoints = Math.min(...players.map(player => player[1].points));
-  const maxExact = Math.max(...players.map(player => player[1].exact));
-
-  const bestPlayers = players
-    .filter(player => player[1].points === maxPoints)
-    .map(player => player[0]);
-
-  const worstPlayers = players
-    .filter(player => player[1].points === minPoints)
-    .map(player => player[0]);
-
-  const sharpshooters = players
-    .filter(player => player[1].exact === maxExact && maxExact > 0)
-    .map(player => player[0]);
-
-  document.getElementById("daily-best").textContent =
-    bestPlayers.join(" / ");
-
-  document.getElementById("daily-worst").textContent =
-    worstPlayers.join(" / ");
-
-  document.getElementById("daily-sharpshooter").textContent =
-    sharpshooters.length > 0 ? sharpshooters.join(" / ") : "Nikdo";
-}
-
-function setupFlipCards() {
-  const cards = document.querySelectorAll(".flip-card");
-
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("is-flipped");
-    });
-  });
-}
 function setupPlayerModal(players) {
   const modal = document.getElementById("player-modal");
   const closeButton = document.getElementById("player-modal-close");
@@ -795,6 +693,8 @@ function openPlayerModal(player) {
   const name = player[0];
   const data = player[1];
 
+  const history = data.history || [];
+
   const avgGoals = (data.totalTipGoals / data.tipsCount).toFixed(1);
 
   const winnerAccuracy =
@@ -803,6 +703,38 @@ function openPlayerModal(player) {
       : 0;
 
   const form = data.form ? data.form.slice(-5).join(" ") : "-";
+
+  const bestHit = history.find(item => item.isExact);
+
+  const worstFail = history.length > 0
+    ? [...history].sort((a, b) => b.distance - a.distance)[0]
+    : null;
+
+  const scoreAccuracy =
+    history.length > 0
+      ? (
+          history.reduce((sum, item) => sum + item.distance, 0) /
+          history.length
+        ).toFixed(1)
+      : "-";
+
+  const longestPointStreak = getLongestPointStreak(history);
+
+  const mostCommonTip = getMostCommonTip(history);
+
+  const offensiveAvg =
+    history.length > 0
+      ? (
+          history.reduce((sum, item) => {
+            return sum + Number(item.tipHome) + Number(item.tipAway);
+          }, 0) / history.length
+        ).toFixed(1)
+      : "-";
+
+  const conservativeLabel =
+    offensiveAvg !== "-" && Number(offensiveAvg) <= 5
+      ? "Spíš konzervativní"
+      : "Spíš ofenzivní";
 
   nameElement.textContent = name;
 
@@ -831,7 +763,89 @@ function openPlayerModal(player) {
       <span>Forma posledních 5 zápasů</span>
       <strong>${form}</strong>
     </div>
+
+    <div class="player-stat-box player-stat-wide">
+      <span>🏆 Nejlepší trefa</span>
+      <strong>${formatBestHit(bestHit)}</strong>
+    </div>
+
+    <div class="player-stat-box player-stat-wide">
+      <span>💣 Největší fail</span>
+      <strong>${formatWorstFail(worstFail)}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>🎯 Přesnost skóre</span>
+      <strong>${scoreAccuracy}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>🔥 Nejdelší bodová série</span>
+      <strong>${longestPointStreak}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>⚔️ Nejčastější tip</span>
+      <strong>${mostCommonTip}</strong>
+    </div>
+
+    <div class="player-stat-box">
+      <span>📈 Ofenzivnost</span>
+      <strong>${offensiveAvg}</strong>
+    </div>
+
+    <div class="player-stat-box player-stat-wide">
+      <span>🧊 Konzervativnost</span>
+      <strong>${conservativeLabel}</strong>
+    </div>
   `;
 
   modal.classList.add("is-open");
+}
+
+function getLongestPointStreak(history) {
+  let currentStreak = 0;
+  let longestStreak = 0;
+
+  history.forEach(item => {
+    if (item.earnedPoints > 0) {
+      currentStreak += 1;
+      longestStreak = Math.max(longestStreak, currentStreak);
+    } else {
+      currentStreak = 0;
+    }
+  });
+
+  return `${longestStreak} zápasů`;
+}
+
+function getMostCommonTip(history) {
+  if (history.length === 0) return "-";
+
+  const counts = {};
+
+  history.forEach(item => {
+    const score = `${item.tipHome}:${item.tipAway}`;
+
+    if (!counts[score]) {
+      counts[score] = 0;
+    }
+
+    counts[score] += 1;
+  });
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])[0][0];
+}
+
+function formatBestHit(item) {
+  if (!item) return "Zatím žádná přesná trefa";
+
+  return `${item.homeTeam} ${item.resultHome}:${item.resultAway} ${item.awayTeam} · tip ${item.tipHome}:${item.tipAway}`;
+}
+
+function formatWorstFail(item) {
+  if (!item) return "-";
+
+  return `${item.homeTeam} ${item.resultHome}:${item.resultAway} ${item.awayTeam} · tip ${item.tipHome}:${item.tipAway} · odchylka ${item.distance}`;
 }
