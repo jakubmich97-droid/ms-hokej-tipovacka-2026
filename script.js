@@ -47,7 +47,8 @@ function startApp(matches, lastUpdate) {
           exact: 0,
           totalTipGoals: 0,
           tipsCount: 0,
-          correctWinners: 0
+          correctWinners: 0,
+          form: []
         };
       }
 
@@ -60,12 +61,24 @@ function startApp(matches, lastUpdate) {
         leaderboard[tip.name].correctWinners += 1;
       }
       
+let earnedPoints = 0;
+
       if (tip.isExact) {
+        earnedPoints = 3;
         leaderboard[tip.name].points += 3;
         leaderboard[tip.name].exact += 1;
         totalExact++;
       } else if (closestTips.includes(tip)) {
+        earnedPoints = 1;
         leaderboard[tip.name].points += 1;
+      }
+      
+      if (earnedPoints > 0) {
+        leaderboard[tip.name].form.push("🟢");
+      } else if (tip.correctWinner) {
+        leaderboard[tip.name].form.push("🟡");
+      } else {
+        leaderboard[tip.name].form.push("⚫");
       }
     });
   });
@@ -199,7 +212,13 @@ function renderLeaderboard(players) {
             (data.correctWinners / data.tipsCount) * 100
           )
         : 0;
+    
+    const form =
+      data.form
+        .slice(-5)
+        .join(" ");
 
+    
     row.innerHTML = `
       <td class="${rankClass}">
         ${positionText}
@@ -224,6 +243,10 @@ function renderLeaderboard(players) {
       <td>
         ${winnerAccuracy}%
       </td>
+      <td>
+        ${form}
+      </td>
+      
     `;
 
     tbody.appendChild(row);
