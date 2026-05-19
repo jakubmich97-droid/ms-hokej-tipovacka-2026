@@ -246,14 +246,6 @@ function renderLeaderboard(players) {
       </td>
 
       <td>
-        ${avgGoals}
-      </td>
-
-      <td>
-        ${winnerAccuracy}%
-      </td>
-
-      <td>
         ${form}
       </td>
     `;
