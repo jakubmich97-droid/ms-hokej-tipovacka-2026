@@ -912,11 +912,14 @@ footer {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(2, 6, 23, 0,82);
+  background: rgba(2, 6, 23, 0.82);
   backdrop-filter: blur(8px);
-  align-items: center;
+
+  align-items: flex-start;
   justify-content: center;
+
   padding: 20px;
+  overflow-y: auto;
 }
 
 .player-modal.is-open {
@@ -925,6 +928,9 @@ footer {
 
 .player-modal-content {
   width: min(680px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+
   background: rgba(15, 23, 42, 0.96);
   border: 1px solid rgba(125, 211, 252, 0.24);
   border-radius: 24px;
@@ -978,7 +984,23 @@ footer {
 }
 
 @media (max-width: 520px) {
+  .player-modal {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .player-modal-content {
+    max-height: calc(100vh - 24px);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
   .player-modal-stats {
     grid-template-columns: 1fr;
+  }
+
+  .player-stat-box strong {
+    font-size: 18px;
+    line-height: 1.25;
   }
 }
