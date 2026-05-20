@@ -450,7 +450,7 @@
     },
     {
       "date": "2026-05-20",
-      "group": "A",
+      "group": "B",
       "home": "Švédsko",
       "homeFlag": "se",
       "away": "Slovinsko",
@@ -466,7 +466,7 @@
     },
     {
       "date": "2026-05-20",
-      "group": "B",
+      "group": "A",
       "home": "USA",
       "homeFlag": "us",
       "away": "Německo",
@@ -482,7 +482,7 @@
     },
     {
       "date": "2026-05-21",
-      "group": "A",
+      "group": "B",
       "home": "Kanada",
       "homeFlag": "ca",
       "away": "Norsko",
@@ -514,7 +514,7 @@
     },
     {
       "date": "2026-05-21",
-      "group": "A",
+      "group": "B",
       "home": "Dánsko",
       "homeFlag": "dk",
       "away": "Slovensko",
@@ -530,7 +530,7 @@
     },
     {
       "date": "2026-05-21",
-      "group": "B",
+      "group": "A",
       "home": "Švýcarsko",
       "homeFlag": "ch",
       "away": "Velká Británie",
@@ -546,7 +546,7 @@
     },
     {
       "date": "2026-05-22",
-      "group": "A",
+      "group": "B",
       "home": "Kanada",
       "homeFlag": "ca",
       "away": "Slovinsko",
@@ -562,7 +562,7 @@
     },
     {
       "date": "2026-05-22",
-      "group": "B",
+      "group": "A",
       "home": "Německo",
       "homeFlag": "de",
       "away": "Maďarsko",
