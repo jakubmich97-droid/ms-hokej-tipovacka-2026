@@ -453,9 +453,20 @@ function createMatchCard(match, played) {
 function renderStats(matches, players, totalExact) {
   const playedMatches = matches.filter(isMatchPlayed);
 
-  document.getElementById("players-count").textContent = players.length;
-  document.getElementById("matches-count").textContent = playedMatches.length;
-  document.getElementById("exact-count").textContent = totalExact;
+    animateNumber(
+      document.getElementById("players-count"),
+      players.length
+    );
+    
+    animateNumber(
+      document.getElementById("matches-count"),
+      playedMatches.length
+    );
+    
+    animateNumber(
+      document.getElementById("exact-count"),
+      totalExact
+    );
 
   const leaderElement = document.getElementById("current-leader");
 
