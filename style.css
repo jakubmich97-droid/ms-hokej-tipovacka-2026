@@ -1004,3 +1004,59 @@ footer {
     line-height: 1.25;
   }
 }
+.floating-puck {
+  position: fixed;
+
+  width: 340px;
+  height: 340px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 35%,
+      rgba(255,255,255,0.08),
+      rgba(0,0,0,0.92) 58%,
+      rgba(0,0,0,1) 100%
+    );
+
+  opacity: 0.06;
+
+  filter: blur(1px);
+
+  top: 12%;
+  left: -120px;
+
+  z-index: 0;
+  pointer-events: none;
+
+  animation:
+    puckFloat 22s ease-in-out infinite alternate;
+}
+
+.floating-puck::before {
+  content: "";
+
+  position: absolute;
+  inset: 12px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255,255,255,0.05);
+}
+
+@keyframes puckFloat {
+  0% {
+    transform:
+      translateX(0)
+      translateY(0)
+      rotate(0deg);
+  }
+
+  100% {
+    transform:
+      translateX(180px)
+      translateY(90px)
+      rotate(18deg);
+  }
+}
