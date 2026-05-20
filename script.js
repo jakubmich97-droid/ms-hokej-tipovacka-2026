@@ -841,3 +841,30 @@ function formatWorstFail(item) {
 
   return `${item.homeTeam} ${item.resultHome}:${item.resultAway} ${item.awayTeam} · tip ${item.tipHome}:${item.tipAway} · odchylka ${item.distance}`;
 }
+function animateNumber(element, targetValue, duration = 700) {
+  if (!element) return;
+
+  const target = Number(targetValue);
+
+  if (Number.isNaN(target)) {
+    element.textContent = targetValue;
+    return;
+  }
+
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const value = Math.round(target * progress);
+
+    element.textContent = value;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
