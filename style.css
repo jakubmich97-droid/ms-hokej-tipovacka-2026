@@ -1007,42 +1007,42 @@ footer {
 .floating-puck {
   position: fixed;
 
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle at 35% 35%,
-      rgba(255,255,255,0.10),
-      rgba(0,0,0,0.94) 58%,
+      rgba(255,255,255,0.08),
+      rgba(0,0,0,0.95) 58%,
       rgba(0,0,0,1) 100%
     );
 
-  opacity: 0.11;
+  opacity: 0.07;
 
   filter: blur(0.5px);
 
   top: 12%;
-  left: -70px;
+  left: -60px;
 
   z-index: 0;
   pointer-events: none;
 
   animation:
-    puckFloat 14s ease-in-out infinite alternate;
+    puckFloat 10s ease-in-out infinite alternate;
 }
 
 .floating-puck::before {
   content: "";
 
   position: absolute;
-  inset: 8px;
+  inset: 6px;
 
   border-radius: 50%;
 
-  border: 2px solid rgba(255,255,255,0.05);
+  border: 2px solid rgba(255,255,255,0.04);
 }
 @keyframes puckFloat {
   0% {
@@ -1054,8 +1054,8 @@ footer {
 
   100% {
     transform:
-      translateX(140px)
-      translateY(70px)
-      rotate(14deg);
+      translateX(110px)
+      translateY(50px)
+      rotate(10deg);
   }
 }
