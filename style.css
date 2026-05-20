@@ -1060,3 +1060,50 @@ footer {
   }
 }
 .card::before,
+#leaderboard tbody tr:nth-child(1) {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 204, 21, 0.14),
+    transparent 70%
+  );
+}
+
+#leaderboard tbody tr:nth-child(2) {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.10),
+    transparent 70%
+  );
+}
+
+#leaderboard tbody tr:nth-child(3) {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 146, 60, 0.12),
+    transparent 70%
+  );
+}
+
+#leaderboard tbody tr:nth-child(1):hover {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 204, 21, 0.20),
+    rgba(14, 165, 233, 0.08)
+  );
+}
+
+#leaderboard tbody tr:nth-child(2):hover {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.16),
+    rgba(14, 165, 233, 0.08)
+  );
+}
+
+#leaderboard tbody tr:nth-child(3):hover {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 146, 60, 0.18),
+    rgba(14, 165, 233, 0.08)
+  );
+}
