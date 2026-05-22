@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-22 18:35",
+  "lastUpdate": "2026-05-22 22:37",
 
   "matches": [
     {
@@ -583,8 +583,8 @@
       "homeFlag": "fi",
       "away": "Velká Británie",
       "awayFlag": "gb",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 4,
+      "resultAway": 0,
       "tips": [
         { "name": "Kuba", "home": 7, "away": 1 },
         { "name": "Dejv", "home": 6, "away": 1 },
@@ -599,8 +599,8 @@
       "homeFlag": "se",
       "away": "Itálie",
       "awayFlag": "it",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 3,
+      "resultAway": 0,
       "tips": [
         { "name": "Kuba", "home": 6, "away": 1 },
         { "name": "Dejv", "home": 5, "away": 1 },
