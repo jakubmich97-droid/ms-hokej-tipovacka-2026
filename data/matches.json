@@ -619,7 +619,7 @@
       "resultAway": "-",
       "tips": [
         { "name": "Kuba", "home": 6, "away": 0 },
-        { "name": "Dejv", "home": 7,, "away": 1 },
+        { "name": "Dejv", "home": 7, "away": 1 },
         { "name": "Jiřoch", "home": 5, "away": 0 },
         { "name": "Luba", "home": 6, "away": 1 }
       ]
