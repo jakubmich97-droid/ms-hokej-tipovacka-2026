@@ -663,8 +663,8 @@
       "homeFlag": "sk",
       "away": "Česko",
       "awayFlag": "cz",
-      "resultHome": 3,
-      "resultAway": 2,
+      "resultHome": 2,
+      "resultAway": 3,
       "tips": [
         { "name": "Kuba", "home": 3, "away": 4 },
         { "name": "Dejv", "home": 2, "away": 3 },
