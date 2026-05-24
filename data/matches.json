@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-24 18:57",
+  "lastUpdate": "2026-05-25 00:57",
 
   "matches": [
     {
@@ -743,8 +743,8 @@
       "homeFlag": "fi",
       "away": "Rakousko",
       "awayFlag": "at",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 5,
+      "resultAway": 2,
       "tips": [
         { "name": "Kuba", "home": 5, "away": 0 },
         { "name": "Dejv", "home": 6, "away": 2 },
@@ -759,8 +759,8 @@
       "homeFlag": "sk",
       "away": "Kanada",
       "awayFlag": "ca",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 1,
+      "resultAway": 5,
       "tips": [
         { "name": "Kuba", "home": 3, "away": 5 },
         { "name": "Dejv", "home": 3, "away": 6 },
