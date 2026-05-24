@@ -48,7 +48,7 @@ function startApp(matches, lastUpdate) {
           totalTipGoals: 0,
           tipsCount: 0,
           correctWinners: 0,
-          totalDistance: 0
+          totalDistance: 0,
           form: [],
           history: []
         };
@@ -167,23 +167,41 @@ function getClosestTipsForMatch(match) {
   });
 }
 
-function getPositionText(players, index) {
-  const currentPoints = players[index][1].points;
+function getPlayerAccuracy(player) {
+  const data = player[1];
 
-  const samePointPlayers = players.filter(player => {
-    return player[1].points === currentPoints;
+  if (!data.tipsCount) {
+    return Infinity;
+  }
+
+  return data.totalDistance / data.tipsCount;
+}
+
+function getPositionText(players, index) {
+  const currentPlayer = players[index];
+  const currentPoints = currentPlayer[1].points;
+  const currentAccuracy = getPlayerAccuracy(currentPlayer);
+
+  const sameRankPlayers = players.filter(player => {
+    return (
+      player[1].points === currentPoints &&
+      getPlayerAccuracy(player) === currentAccuracy
+    );
   });
 
-  if (samePointPlayers.length === 1) {
+  if (sameRankPlayers.length === 1) {
     return `${index + 1}`;
   }
 
   const firstIndex = players.findIndex(player => {
-    return player[1].points === currentPoints;
+    return (
+      player[1].points === currentPoints &&
+      getPlayerAccuracy(player) === currentAccuracy
+    );
   });
 
   const lastIndex =
-    firstIndex + samePointPlayers.length - 1;
+    firstIndex + sameRankPlayers.length - 1;
 
   return `${firstIndex + 1}/${lastIndex + 1}`;
 }
