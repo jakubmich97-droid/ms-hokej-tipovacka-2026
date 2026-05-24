@@ -48,6 +48,7 @@ function startApp(matches, lastUpdate) {
           totalTipGoals: 0,
           tipsCount: 0,
           correctWinners: 0,
+          totalDistance: 0
           form: [],
           history: []
         };
@@ -57,6 +58,7 @@ function startApp(matches, lastUpdate) {
         Number(tip.home) + Number(tip.away);
 
       leaderboard[tip.name].tipsCount += 1;
+      leaderboard[tip.name].totalDistance += tip.distance;
 
       if (tip.correctWinner) {
         leaderboard[tip.name].correctWinners += 1;
@@ -99,7 +101,14 @@ function startApp(matches, lastUpdate) {
   });
 
   const sortedPlayers = Object.entries(leaderboard).sort((a, b) => {
-    return b[1].points - a[1].points;
+    if (b[1].points !== a[1].points) {
+      return b[1].points - a[1].points;
+    }
+  
+    const accuracyA = a[1].totalDistance / a[1].tipsCount;
+    const accuracyB = b[1].totalDistance / b[1].tipsCount;
+  
+    return accuracyA - accuracyB;
   });
 
   renderLeaderboard(sortedPlayers);
@@ -718,7 +727,7 @@ function openPlayerModal(player) {
       ? (
           history.reduce((sum, item) => sum + item.distance, 0) /
           history.length
-        ).toFixed(1)
+        ).toFixed(2)
       : "-";
 
   const longestPointStreak = getLongestPointStreak(history);
