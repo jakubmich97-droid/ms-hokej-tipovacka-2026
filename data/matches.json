@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-23 22:49",
+  "lastUpdate": "2026-05-24 18:33",
 
   "matches": [
     {
@@ -727,8 +727,8 @@
       "homeFlag": "gb",
       "away": "Lotyšsko",
       "awayFlag": "lv",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 0,
+      "resultAway": 6,
       "tips": [
         { "name": "Kuba", "home": 2, "away": 5 },
         { "name": "Dejv", "home": 1, "away": 4 },
