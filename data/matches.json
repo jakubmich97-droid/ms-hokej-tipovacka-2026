@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-25 12:33",
+  "lastUpdate": "2026-05-25 18:52",
 
   "matches": [
     {
@@ -775,8 +775,8 @@
       "homeFlag": "cz",
       "away": "Norsko",
       "awayFlag": "no",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 1,
+      "resultAway": 4,
       "tips": [
         { "name": "Kuba", "home": 4, "away": 2 },
         { "name": "Dejv", "home": 3, "away": 2 },
@@ -791,8 +791,8 @@
       "homeFlag": "us",
       "away": "Maďarsko",
       "awayFlag": "hu",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 7,
+      "resultAway": 3,
       "tips": [
         { "name": "Kuba", "home": 6, "away": 1 },
         { "name": "Dejv", "home": 5, "away": 1 },
