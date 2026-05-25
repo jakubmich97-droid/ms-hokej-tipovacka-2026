@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-25 00:57",
+  "lastUpdate": "2026-05-25 10:33",
 
   "matches": [
     {
@@ -778,8 +778,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 4, "away": 2 },
+        { "name": "Dejv", "home": 3, "away": 2 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -794,8 +794,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 6, "away": 1 },
+        { "name": "Dejv", "home": 5, "away": 1 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -810,8 +810,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 5, "away": 1 },
+        { "name": "Dejv", "home": 5, "away": 0 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -826,8 +826,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 4, "away": 2 },
+        { "name": "Dejv", "home": 3, "away": 1 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -842,8 +842,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 2, "away": 5 },
+        { "name": "Dejv", "home": 2, "away": 4 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -858,8 +858,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 4, "away": 3 },
+        { "name": "Dejv", "home": 3, "away": 2 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -874,8 +874,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 6, "away": 3 },
+        { "name": "Dejv", "home": 5, "away": 2 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -890,8 +890,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 5, "away": 2 },
+        { "name": "Dejv", "home": 5, "away": 1 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -906,8 +906,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 2, "away": 5 },
+        { "name": "Dejv", "home": 4, "away": 3 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
@@ -922,8 +922,8 @@
       "resultHome": "-",
       "resultAway": "-",
       "tips": [
-        { "name": "Kuba", "home": "-", "away": "-" },
-        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Kuba", "home": 4, "away": 2 },
+        { "name": "Dejv", "home": 2, "away": 3 },
         { "name": "Jiřoch", "home": "-", "away": "-" },
         { "name": "Luba", "home": "-", "away": "-" }
       ]
