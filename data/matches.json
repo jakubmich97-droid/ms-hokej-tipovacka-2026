@@ -970,8 +970,8 @@
       "homeFlag": "ca",
       "away": "USA",
       "awayFlag": "us",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 4,
+      "resultAway": 0,
       "tips": [
         { "name": "Kuba", "home": 5, "away": 3 },
         { "name": "Dejv", "home": 4, "away": 3 },
