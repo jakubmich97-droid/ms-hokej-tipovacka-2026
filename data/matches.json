@@ -995,6 +995,40 @@
         { "name": "Jiřoch", "home": 2, "away": 4 },
         { "name": "Luba", "home": 4, "away": 2 }
       ]
+    },
+
+                {
+      "date": "2026-05-30",
+      "group": "",
+      "home": "Švýcarsko",
+      "homeFlag": "ch",
+      "away": "Norsko",
+      "awayFlag": "no",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
+    },
+
+                    {
+      "date": "2026-05-30",
+      "group": "",
+      "home": "Kanada",
+      "homeFlag": "ca",
+      "away": "Finsko",
+      "awayFlag": "fi",
+      "resultHome": "-",
+      "resultAway": "-",
+      "tips": [
+        { "name": "Kuba", "home": "-", "away": "-" },
+        { "name": "Dejv", "home": "-", "away": "-" },
+        { "name": "Jiřoch", "home": "-", "away": "-" },
+        { "name": "Luba", "home": "-", "away": "-" }
+      ]
     }
   ]
 }
