@@ -1037,8 +1037,8 @@
       "homeFlag": "ca",
       "away": "Norsko",
       "awayFlag": "no",
-      "resultHome": "-",
-      "resultAway": "-",
+      "resultHome": 2,
+      "resultAway": 3,
       "tips": [
         { "name": "Kuba", "home": 7, "away": 2 },
         { "name": "Dejv", "home": 5, "away": 2 },
